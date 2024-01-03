@@ -1,4 +1,4 @@
-Welcome to my Jekyll-inspired webpage on GitHub-pages. Here's the link to the website: https://purva117.github.io/web/
+Welcome to my Jekyll-inspired webpage on GitHub-pages. Here's the link to the website: https://purva117.github.io/website/
 
 
 
