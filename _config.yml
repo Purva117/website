@@ -3,8 +3,8 @@ title: Purva
 subtitle: Computational Analyst
 email: purva.informatik@gmail.com
 description: Aspiring Data Scientist<br />with a thrill for life.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://purvapatel.github.io/" # the base hostname & protocol for your site
+baseurl: "/website" # the subpath of your site, e.g. /blog
+url: "https://purva117.github.io/" # the base hostname & protocol for your site
 author:
 street_address: 
 city: Dresden
