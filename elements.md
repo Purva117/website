@@ -109,8 +109,14 @@ nav-menu: true
                             stepSize: 25, // Set step size for inner grid lines
                         },
 		grid: {
-		    color: "rgba(255, 255, 255, 0.75)", // Set grid color to white
+		    color: "rgba(255, 255, 255, 0.25)", // Set grid color to white
 		},
+		pointLabels: {
+                    font: {
+                        size: 15, // Change font size
+                    },
+                    color: "rgba(255, 255, 255, 1.0)", // Change font color
+                },
 	    },
 	},
 	interaction: {
@@ -162,6 +168,12 @@ nav-menu: true
 		grid: {
 		    color: "rgba(255, 255, 255, 0.25)", // Set grid color to white
 		},
+		pointLabels: {
+                    font: {
+                        size: 15, // Change font size
+                    },
+                    color: "rgba(255, 255, 255, 1.0)", // Change font color
+                },
 	    },
 	},
 	interaction: {
@@ -190,7 +202,7 @@ nav-menu: true
 	    {
 		data: [85, 75, 80, 80, 70, 55, 50],
 		backgroundColor: "rgba(127, 255, 212, 0.6)",
-		borderColor: "rgba(255, 128, 170, 1)",
+		borderColor: "rgba(127, 255, 212, 1)",
 	    },
 	],
     };
@@ -213,6 +225,12 @@ nav-menu: true
 		grid: {
 		    color: "rgba(255, 255, 255, 0.25)", // Set grid color to white
 		},
+		pointLabels: {
+                    font: {
+                        size: 15, // Change font size
+                    },
+                    color: "rgba(255, 255, 255, 1.0)", // Change font color
+                },
 	    },
 	},
 	interaction: {
