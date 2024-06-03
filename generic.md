@@ -30,11 +30,11 @@ nav-menu: true
 				<header class="major">
 					<h3>Master's Thesis: Detecting patterns in 'omics data</h3>
 				</header>
-				<p>May 2023 - Present, TU Dresden, Physics of Life - <a href="https://physics-of-life.tu-dresden.de/research/core-groups/doyle">Doyle Lab</a></p>
+				<p>May 2023 - Jan 2024, TU Dresden, Physics of Life - <a href="https://physics-of-life.tu-dresden.de/research/core-groups/doyle">Doyle Lab</a></p>
 				<p>(Manuscript in progress)</p>
 				<p><strong>Obejctive:</strong> To identify key proteins in a proteomics dataset using a blend of traditional statistics and advanced Machine Learning on sample data for thorough analysis.</p>
 				<p><strong>Methodology:</strong> The project employs two data analysis approaches. The classical method involves dimensionality reduction, clustering, and statistical tests to identify changing proteins, with consideration of their biological significance. The advanced approach utilizes Topological Data Analysis to uncover persistent patterns across different scales in the data's topology.</p>
-				<p><strong>Packages:</strong> pandas, numpy, scipy, seaborn, RIPSER, sklearn, matplotlib, NetworkX</p>
+				<p><strong>Python packages:</strong> pandas, numpy, scipy, seaborn, RIPSER, sklearn, matplotlib, NetworkX</p>
 			</div>
 		</div>
 	</section>
@@ -51,7 +51,7 @@ nav-menu: true
 				<p>(Manuscript in progress)</p>
 				<p><strong>Obejctive:</strong> To develop a quantitative model for protein (YAP) mechano-signaling in response to cellular stimuli across different cell types.</p>
 				<p><strong>Methodology:</strong> The project utilizes systematic meta-analysis for data collection, non-linear regression for modeling, and an automated ImageJ image analysis pipeline for validation using experimental images from the public domain and lab collaborators.</p>
-				<p><strong>Packages:</strong> pandas, numpy, scipy, sklearn, matplotlib, ImageJ(FIJI)</p>
+				<p><strong>Python packages:</strong> pandas, numpy, scipy, sklearn, matplotlib, ImageJ(FIJI)</p>
 			</div>
 		</div>
 	</section>
