@@ -19,8 +19,8 @@ nav-menu: true
 	<div class="6u 12u$(small)">
 		<h3>Academia</h3>
 		<h4>M.S. - <a href="https://tu-dresden.de/ing/informatik/studium/studienangebot/master-studiengaenge/computational-modeling-and-simulation"><u>Computational Modeling and Simulation</u></a></h4>
-		<p>October 2020 - Present, TU Dresden</p>
-		<p>Track: <strong>Computational Engineering</strong></p>
+		<p>October 2020 - January 2024, TU Dresden</p>
+		<p>Final Grade: <strong>2.0</strong></p>
 		<p>Key subjects of study:<ul>
 			<li>Machine Learning</li>
 			<li>Statistics, Stochastics and Probablility</li>
@@ -41,8 +41,13 @@ nav-menu: true
 	<div class="6u$ 12u$(small)">
 		<h3>Professional Experience</h3>
 		<h4>University Research Assistant</h4>
-		<p>May 2023 - Present, TU Dresden, Physics of Life - <a href="https://physics-of-life.tu-dresden.de/research/core-groups/doyle">Doyle Lab</a></p>
-		<p>Key responsibilities: </p>
+		<p>May 2023 - December 2023, TU Dresden, Physics of Life - <a href="https://physics-of-life.tu-dresden.de/research/core-groups/doyle">Doyle Lab</a></p>
+		<p>Key responsibilities:<ul>
+			<li>Implementation of data analysis pipelines for biological fluid Mass Spectrometry data</li>
+			<li>Integrate Machine Learning to identify differentially expressed features</li>
+			<li>Model validation in absence of ground truth</li>
+			<li>Python packages: <strong>pandas, numpy, scikit-learn, NetworkX, RIPSER, matplotlib</strong></li>
+		</ul></p>
 		<h4>Student Research Assistant</h4>
 		<p>May 2022 - October 2022, TU Dresden, Physics of Life - <a href="https://physics-of-life.tu-dresden.de/research/core-groups/doyle">Doyle Lab</a></p>
 		<p>Key responsibilities:<ul>
@@ -104,7 +109,7 @@ nav-menu: true
                             stepSize: 25, // Set step size for inner grid lines
                         },
 		grid: {
-		    color: "rgba(255, 255, 255, 0.25)", // Set grid color to white
+		    color: "rgba(255, 255, 255, 0.75)", // Set grid color to white
 		},
 	    },
 	},
@@ -180,12 +185,12 @@ nav-menu: true
 
 // Radar Chart Data - Third Plot (7 Skills)
     var radarData3 = {
-	labels: ["Pandas", "Numpy", "Scipy", "Matplotlib", "Seaborn", "NetworkX", "Plotly"],
+	labels: ["Pandas", "Numpy", "scikit-learn", "Matplotlib", "TensorFlow", "NetworkX", "PyTorch"],
 	datasets: [
 	    {
-		data: [85, 75, 80, 80, 60, 45, 40],
+		data: [85, 75, 80, 80, 70, 55, 50],
 		backgroundColor: "rgba(127, 255, 212, 0.6)",
-		borderColor: "rgba(127, 255, 212, 1)",
+		borderColor: "rgba(255, 128, 170, 1)",
 	    },
 	],
     };
