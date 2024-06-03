@@ -2,7 +2,7 @@
 title: Purva
 subtitle: Computational Analyst
 email: purva.informatik@gmail.com
-description: Aspiring Data Scientist<br />with a thrill for life.
+description: Deciphering Data<br />Delivering Results.
 baseurl: "/website" # the subpath of your site, e.g. /blog
 url: "https://purva117.github.io/" # the base hostname & protocol for your site
 author:
@@ -11,7 +11,6 @@ city: Dresden
 state: Saxony,
 zip_code:
 country: Germany
-phone: +49 179 4157537
 
 # homepage tiles
 tiles-source: pages # accepts "posts" or "pages"
@@ -25,7 +24,7 @@ socials:
   GitHub: https://github.com/Purva117
   GitLab:
   Google-Plus: 
-  Instagram:
+  Instagram: 
   LinkedIn: https://www.linkedin.com/in/purvapatel117/
   Twitter: 
   Facebook:
