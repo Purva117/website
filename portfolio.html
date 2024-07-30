@@ -1,33 +1,14 @@
 <!DOCTYPE html>
-
-<!--
- // WEBSITE: https://themefisher.com
- // TWITTER: https://twitter.com/themefisher
- // FACEBOOK: https://www.facebook.com/themefisher
- // GITHUB: https://github.com/themefisher/
--->
-
 <html lang="en">
 <head>
 
   <!-- Basic Page Needs
   ================================================== -->
   <meta charset="utf-8">
-  <title>Kross - Creative Portfolio Template</title>
-
-  <!-- Mobile Specific Metas
-  ================================================== -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Creative Portfolio Template">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="author" content="Themefisher">
-  <meta name="generator" content="Themefisher Kross Template v1.0">
-  
-  <!-- theme meta -->
-  <meta name="theme-name" content="kross" />
+  <title>Purva Patel</title>
   
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon-512x512.jpg" />
   
   <!-- ** Plugins Needed for the Project ** -->
   <!-- Bootstrap -->
@@ -47,7 +28,7 @@
 
 <header class="navigation fixed-top">
   <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand font-tertiary h3" href="index.html"><img src="images/logo.png" alt="Myself"></a>
+    <a class="navbar-brand font-tertiary h3" href="index.html"> <img src="images/logo.png" alt="Myself" class="navbar-logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
       aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -55,20 +36,20 @@
 
     <div class="collapse navbar-collapse text-center" id="navigation">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="index.html">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="about.html">about</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="blog.html">Blog</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="portfolio.html">Portfolio</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="blog.html">Blog</a>
+        </li>
+        <!-- <li class="nav-item">
           <a class="nav-link" href="contact.html">Contact</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">About</a>
         </li>
       </ul>
     </div>
@@ -86,227 +67,139 @@
   </div>
   <!-- background shapes -->
   <img src="images/illustrations/page-title.png" alt="illustrations" class="bg-shape-1 w-100">
-  <img src="images/illustrations/leaf-pink-round.png" alt="illustrations" class="bg-shape-2">
-  <img src="images/illustrations/dots-cyan.png" alt="illustrations" class="bg-shape-3">
-  <img src="images/illustrations/leaf-orange.png" alt="illustrations" class="bg-shape-4">
-  <img src="images/illustrations/leaf-yellow.png" alt="illustrations" class="bg-shape-5">
-  <img src="images/illustrations/dots-group-cyan.png" alt="illustrations" class="bg-shape-6">
-  <img src="images/illustrations/leaf-cyan-lg.png" alt="illustrations" class="bg-shape-7">
 </section>
 <!-- /page title -->
 
 <!-- portfolio -->
+
 <section class="section">
   <div class="container">
-    <div class="row mb-5">
-      <div class="col-12">
-        <div class="btn-group btn-group-toggle justify-content-center d-flex" data-toggle="buttons">
-          <label class="btn btn-sm btn-primary active">
-            <input type="radio" name="shuffle-filter" value="all" checked="checked" />All
-          </label>
-          <label class="btn btn-sm btn-primary">
-            <input type="radio" name="shuffle-filter" value="design" />UI/UX Design
-          </label>
-          <label class="btn btn-sm btn-primary">
-            <input type="radio" name="shuffle-filter" value="branding" />BRANDING
-          </label>
-          <label class="btn btn-sm btn-primary">
-            <input type="radio" name="shuffle-filter" value="illustration" />ILLUSTRATION
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="row shuffle-wrapper">
-      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;design&quot;,&quot;illustration&quot;]">
-        <div class="position-relative rounded hover-wrapper">
-          <img src="images/portfolio/item-1.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="#!">view project</a>
+    <div class="row">
+      <!-- Project 1 -->
+      <div class="col-12 project-container" id="proj_1">
+        <div class="row project-content">
+          <div class="col-md-5 order-md-1">
+            <div class="position-relative hover-wrapper">
+              <img src="images/portfolio/item-1.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block project-image">
+              <div class="hover-overlay">
+                <div class="hover-content">
+                  <a class="btn btn-light btn-sm" href="https://purva117.github.io/Global_News_Navigator/" target="_blank">view project</a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;branding&quot;]">
-        <div class="position-relative rounded hover-wrapper">
-          <img src="images/portfolio/item-2.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="#!">view project</a>
-            </div>
+          <div class="vertical-line vertical-line-right order-md-1"></div>
+          <div class="col-md-6 order-md-2">
+            <h3 class="project-title">Global News Navigator</h3>
+            <p class="project-description">Global News Navigator provides a dynamic, interactive summary of global 
+              news from the past 24 hours. Utilizing a sophisticated language model, the platform aggregates news 
+              headlines and categorizes them by geographic location. Each country's news is summarized, highlighting 
+              key updates and overall sentiment. Users can explore this information through an engaging 3D globe 
+              interface, allowing them to visually interact with the latest global developments and understand the 
+              prevailing sentiment in each region. Stay informed and connected with the world like never before with 
+              Global News Navigator.</p>
           </div>
         </div>
+        <div class="project-divider"></div>
       </div>
-      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;illustration&quot;]">
-        <div class="position-relative rounded hover-wrapper">
-          <img src="images/portfolio/item-3.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="#!">view project</a>
+      <!-- Project 2 -->
+      <div class="col-12 project-container" id="proj_2">
+        <div class="row project-content">
+          <div class="col-md-5 order-md-2">
+            <div class="position-relative hover-wrapper">
+              <img src="images/portfolio/item-2.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block project-image">
+              <div class="hover-overlay">
+                <div class="hover-content">
+                  <a class="btn btn-light btn-sm" href="https://purva117.github.io/SmartStock_Predictor/" target="_blank">view project</a>
+                </div>
+              </div>
             </div>
           </div>
+          <div class="col-md-6 order-md-1">
+            <h3 class="project-title">SmartStock Predictor</h3>
+            <p class="project-description">SmartStock Predictor leverages historical stock price data since 2000 
+              and employs LSTM models to forecast stock prices for the upcoming month. It provides users with 
+              buy/sell recommendations and displays both actual and predicted prices on an interactive chart, 
+              along with performance statistics.</p>
+          </div>
+          <div class="vertical-line vertical-line-left order-md-1"></div>
         </div>
+        <div class="project-divider"></div>
       </div>
-      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;design&quot;,&quot;branding&quot;]">
-        <div class="position-relative rounded hover-wrapper">
-          <img src="images/portfolio/item-6.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="#!">view project</a>
+      <!-- Project 3 -->
+      <div class="col-12 project-container" id="proj_3">
+        <div class="row project-content">
+          <div class="col-md-5 order-md-1">
+            <div class="position-relative hover-wrapper">
+              <img src="images/portfolio/item-3.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block project-image">
+              <div class="hover-overlay">
+                <div class="hover-content">
+                  <a class="btn btn-light btn-sm" href="https://purva117.github.io/Marvel_Character_Network/" target="_blank">view project</a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;illustration&quot;]">
-        <div class="position-relative rounded hover-wrapper">
-          <img src="images/portfolio/item-8.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="#!">view project</a>
-            </div>
+          <div class="vertical-line vertical-line-right order-md-1"></div>
+          <div class="col-md-6 order-md-2">
+            <h3 class="project-title">Marvel Character Network</h3>
+            <p class="project-description">Marvel Character Network is an interactive visualization of MCU characters, 
+              showcasing their relationships and characteristics. Created using D3.js, this project allows users 
+              to explore the Marvel Universe through dynamic nodes representing each character. View detailed 
+              information, including network centrality stats and movie appearances. Dive deep into the Marvel 
+              Universe and discover intricate character connections with Marvel Character Network.</p>
           </div>
         </div>
+        <div class="project-divider"></div>
       </div>
-      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;design&quot;]">
-        <div class="position-relative rounded hover-wrapper">
-          <img src="images/portfolio/item-5.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="#!">view project</a>
+      <!-- Project 4 -->
+      <div class="col-12 project-container" id="proj_4">
+        <div class="row project-content">
+          <div class="col-md-5 order-md-2">
+            <div class="position-relative hover-wrapper">
+              <img src="images/portfolio/item-4.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block project-image">
+              <div class="hover-overlay">
+                <div class="hover-content">
+                  <a class="btn btn-light btn-sm" href="https://github.com/purva117/Geo_viz" target="_blank">view project</a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;branding&quot;]">
-        <div class="position-relative rounded hover-wrapper">
-          <img src="images/portfolio/item-1.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="#!">view project</a>
-            </div>
+          <div class="col-md-6 order-md-1">
+            <h3 class="project-title">GeoViz Landscape Narrator</h3>
+            <p class="project-description">GeoViz Landscape Narrator provides an attractive and detailed map of 
+              any location within a 15 km radius, highlighting building structures, green areas, and water bodies. 
+              Using Python libraries OSMnx and NetworkX, this tool can extract and visualize road networks, selective 
+              green fields, and water bodies based on provided coordinates. Users can easily change the location and 
+              radius in the Main.ipynb file, with Dresden, DE as the default example. Explore and visualize urban landscapes with GeoViz Landscape Narrator.</p>
           </div>
+          <div class="vertical-line vertical-line-left order-md-1"></div>
         </div>
-      </div>
-      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;design&quot;,&quot;illustration&quot;,&quot;branding&quot;]">
-        <div class="position-relative rounded hover-wrapper">
-          <img src="images/portfolio/item-3.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="#!">view project</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-6 mb-4 shuffle-item illustration" data-groups="[&quot;illustration&quot;]">
-        <div class="position-relative rounded hover-wrapper">
-          <img src="images/portfolio/item-7.png" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="#!">view project</a>
-            </div>
-          </div>
-        </div>
+        <div class="project-divider"></div>
       </div>
     </div>
   </div>
 </section>
 <!-- /portfolio -->
 
-<!-- clients -->
-<section class="section bg-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title">My Clients</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="client-logo-slider d-flex align-items-center">
-          <a href="contact.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-              src="images/clients-logo/client-logo-1.png" alt="client-logo"></a>
-          <a href="contact.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-              src="images/clients-logo/client-logo-2.png" alt="client-logo"></a>
-          <a href="contact.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-              src="images/clients-logo/client-logo-3.png" alt="client-logo"></a>
-          <a href="contact.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-              src="images/clients-logo/client-logo-4.png" alt="client-logo"></a>
-          <a href="contact.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-              src="images/clients-logo/client-logo-5.png" alt="client-logo"></a>
-          <a href="contact.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-              src="images/clients-logo/client-logo-1.png" alt="client-logo"></a>
-          <a href="contact.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-              src="images/clients-logo/client-logo-2.png" alt="client-logo"></a>
-          <a href="contact.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-              src="images/clients-logo/client-logo-3.png" alt="client-logo"></a>
-          <a href="contact.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-              src="images/clients-logo/client-logo-4.png" alt="client-logo"></a>
-          <a href="contact.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-              src="images/clients-logo/client-logo-5.png" alt="client-logo"></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /clients -->
-
-<!-- contact -->
-<section class="section section-on-footer" data-background="images/backgrounds/bg-dots.png">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title">Contact Info</h2>
-      </div>
-      <div class="col-lg-8 mx-auto">
-        <div class="bg-white rounded text-center p-5 shadow-down">
-          <h4 class="mb-80">Contact Form</h4>
-          <form action="#" class="row">
-            <div class="col-md-6">
-              <input type="text" id="name" name="name" placeholder="Full Name" class="form-control px-0 mb-4" required>
-            </div>
-            <div class="col-md-6">
-              <input type="email" id="email" name="email" placeholder="Email Address" class="form-control px-0 mb-4" required>
-            </div>
-            <div class="col-12">
-              <textarea name="message" id="message" class="form-control px-0 mb-4"
-                placeholder="Type Message Here" required></textarea>
-            </div>
-            <div class="col-lg-6 col-10 mx-auto">
-              <button class="btn btn-primary w-100">send</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /contact -->
-
 <!-- footer -->
 <footer class="bg-dark footer-section">
   <div class="section">
     <div class="container">
-      <div class="row">
+      <div class="row justify-content-between">
         <div class="col-md-4">
           <h5 class="text-light">Email</h5>
-          <p class="text-white paragraph-lg font-secondary">steve.fruits@email.com</p>
+          <p class="text-white paragraph-lg font-secondary">purva.informatik@gmail.com</p>
         </div>
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <h5 class="text-light">Phone</h5>
           <p class="text-white paragraph-lg font-secondary">+880 2544 658 256</p>
-        </div>
+        </div> -->
         <div class="col-md-4">
-          <h5 class="text-light">Address</h5>
-          <p class="text-white paragraph-lg font-secondary">125/A, CA Commercial Area, California, USA</p>
+          <h5 class="text-light">Location</h5>
+          <p class="text-white paragraph-lg font-secondary">Dresden, Saxony, Germany</p>
         </div>
       </div>
     </div>
-  </div>
-  <div class="border-top text-center border-dark py-5">
-    <p class="mb-0 text-light">Copyright &copy;<script>
-        var CurrentYear = new Date().getFullYear()
-        document.write(CurrentYear)
-      </script> Designed &amp; Developed by <a class="text-white-50" href="Themefisher">Themefisher</a></p>
   </div>
 </footer>
 <!-- /footer -->
