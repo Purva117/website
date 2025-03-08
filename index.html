@@ -1,602 +1,743 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purva Patel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-  <!-- Basic Page Needs
-  ================================================== -->
-  <meta charset="utf-8">
-  <title>Purva Patel</title>
-  
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="images/favicon-512x512.png" />
-  
-  <!-- ** Plugins Needed for the Project ** -->
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
-  <!-- slick slider -->
-  <link rel="stylesheet" href="plugins/slick/slick.css">
-  <!-- themefy-icon -->
-  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+        body {
+            font-family: 'Nunito Sans';
+            line-height: 1.6;
+            color: #FCF5ED;
+            background-color: #1F1717;
+            overflow: hidden;
+        }
 
-  <!-- Main Stylesheet -->
-  <link href="css/style.css" rel="stylesheet">
+        .light-mode {
+            background-color: #FCF5ED;
+            color: #1F1717;
+        }
 
+        .left-pane {
+            font-family: 'Montserrat', sans-serif;
+            width: 30%;
+            height: 100vh;
+            position: fixed;
+            background: #140F0F; /* Darker variant of #1F1717 */
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .light-mode .left-pane {
+            background: #F4BF96;
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .right-pane {
+            width: 70%;
+            margin-left: 30%;
+            height: 100vh;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            background-color: #1F1717; /* Solid color, no gradient */
+        }
+
+        .light-mode section {
+            background-color: #FCF5ED; /* Solid color for light mode */
+        }
+
+        .toggle-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+
+        .toggle-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: #140F0F;
+            color: #FCF5ED;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0px 6px #FCF5ED;
+            transition: background 0.3s ease;
+            position: relative;
+        }
+
+        .toggle-btn i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.25rem;
+            transition: opacity 0.5s ease;
+        }
+
+        .toggle-btn .fa-sun {
+            opacity: 0;
+        }
+
+        .light-mode .toggle-btn {
+            background: #F4BF96;
+            color: #1F1717;
+            box-shadow: 0 0px 6px #1F1717;
+        }
+
+        .light-mode .toggle-btn .fa-moon {
+            opacity: 0;
+        }
+
+        .light-mode .toggle-btn .fa-sun {
+            opacity: 1;
+        }
+
+        .toggle-btn:hover {
+            background: #CE5A67;
+            color: #FCF5ED;
+        }
+
+        .profile-container h1 {
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .profile-container p {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .profile-container .separator {
+            width: 100%;
+            height: 1px;
+            background: #CE5A67;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-icons a {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: #FCF5ED;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .light-mode .contact-icons a {
+            color: #1F1717;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-icons a:hover {
+            color: #FCF5ED;
+            background: #CE5A67;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(206, 90, 103, 0.4);
+        }
+        
+        .light-mode .contact-icons a:hover {
+            color: #FCF5ED;
+        }
+
+        h2 {
+            color: #CE5A67;
+            margin-bottom: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .light-mode h2 {
+            color: #CE5A67;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 0 1rem;
+        }
+
+        /* Academia section CV styling */
+        .education-entry {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .degree-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .institution-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        .institution {
+            font-weight: 500;
+        }
+
+        .duration {
+            opacity: 0.9;
+        }
+
+        .education-details {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .education-details::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #CE5A67;
+        }
+
+        .education-details ul {
+            list-style-type: none;
+        }
+
+        .education-details li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .education-details li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #CE5A67;
+        }
+
+        /* Projects Section Styling */
+        #projects {
+            overflow: hidden;
+        }
+
+        .section-intro {
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            max-width: 650px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .light-mode .project-card {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(206, 90, 103, 0.2);
+            border-color: rgba(206, 90, 103, 0.3);
+        }
+
+        .project-content {
+            padding: 1.8rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-icon {
+            margin-bottom: 1.2rem;
+            font-size: 2rem;
+            color: #CE5A67;
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            border-radius: 50%;
+            background: rgba(206, 90, 103, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-icon {
+            background: #CE5A67;
+            color: #FCF5ED;
+            transform: scale(1.1);
+        }
+
+        .project-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: #FCF5ED;
+            transition: color 0.3s ease;
+        }
+
+        .light-mode .project-card h3 {
+            color: #1F1717;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tags span {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            background: rgba(206, 90, 103, 0.2);
+            color: #CE5A67;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .tech-tags span {
+            background: rgba(206, 90, 103, 0.3);
+        }
+
+        .project-card p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .project-link {
+            color: #FCF5ED;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .light-mode .project-link {
+            color: #1F1717;
+        }
+
+        .project-link:hover {
+            color: #CE5A67;
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        /* Add missing Font Awesome icon */
+        .fa-chart-network:before {
+            content: "\f64f"; /* Using analytics icon as a substitute */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .project-card {
+                max-width: 100%;
+            }
+        }
+
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card {
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .project-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .project-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .project-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .project-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        /* Mobile and responsive adjustments */
+        @media (max-width: 992px) {
+            .left-pane {
+                width: 40%;
+            }
+            .right-pane {
+                width: 60%;
+                margin-left: 40%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .left-pane {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 2rem 1rem;
+                min-height: 100vh;
+                scroll-snap-align: start;
+            }
+            .right-pane {
+                width: 100%;
+                margin-left: 0;
+                height: auto;
+            }
+            body {
+                overflow: auto;
+            }
+            .toggle-container {
+                bottom: 20px;
+                right: 20px;
+                left: auto;
+            }
+            /* Ensure scroll-snap still works */
+            html, body {
+                scroll-snap-type: y mandatory;
+                height: 100%;
+                overflow-y: auto;
+            }
+            section, .left-pane {
+                scroll-snap-align: start;
+                min-height: 100vh;
+            }
+        }
+
+        /* Small mobile adjustments */
+        @media (max-width: 480px) {
+            .profile-container h1 {
+                font-size: 1.8rem;
+            }
+            .contact-icons {
+                gap: 1rem;
+            }
+            .contact-icons a {
+                width: 40px;
+                height: 40px;
+                font-size: 1.3rem;
+            }
+            section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* For very small screens */
+        @media (max-width: 320px) {
+            .profile-container h1 {
+                font-size: 1.5rem;
+            }
+            .contact-icons a {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Prevent content from being hidden behind sticky elements on iOS */
+        @supports (-webkit-touch-callout: none) {
+            section {
+                padding-bottom: 5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+<body>
+    <div class="left-pane">
+        <div class="profile-container">
+            <h1>Purva Patel</h1>
+            <div class="separator"></div>
+            <p>AI Engineer</p>
+            <div class="contact-icons">
+              <a href="https://github.com/Purva117" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/purvapatel117/" target="_blank"><i class="fab fa-linkedin"></i></a>
+              <a href="mailto:purvapatel173@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+    </div>
 
-<body> 
-  <header class="navigation fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <a class="navbar-brand font-tertiary h3" href="index.html"> <img src="images/logo.png" alt="Myself" class="navbar-logo"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-        aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <div class="right-pane">
+        <section id="hero">
+            <div class="container">
+              <h2>Namaste! I'm Purva.</h2>
+              <p>I’m an AI Engineer focused on solving real-world problems and improving productivity to make life easier. With a background in Computational Modeling and Simulation, I break down complex data into meaningful insights. My expertise includes large language models (LLMs), retrieval-augmented generation (RAG), and automation, primarily using Python and deep learning frameworks.<br><br>Beyond work, I enjoy chess, hiking, and art—always up for a challenge, whether on a chessboard, a mountain trail, or a blank canvas. Let’s connect and build something great!</p>
+            </div>
+        </section>
+        
+        <section id="work-expereince">
+            <div class="container">
+                <h2>Work Experience</h2>
 
-      <div class="collapse navbar-collapse text-center" id="navigation">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="portfolio.html">Portfolio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="blog.html">Blog</a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+                <div class="education-entry">
+                  <div class="degree-title">AI Engineer</div>
+                  <div class="institution-info">
+                      <div class="institution">GUTcert</div>
+                      <div class="duration">12.2024 - Present</div>
+                  </div>
+                  <div class="education-details">
+                      <ul>
+                          <li>Developing and integrating AI solutions to assist redundant and repetitive processes</li>
+                          <li>Addressing variety of state-of-the-art techniques including RAG, RAFT and custom fine-tuning of LLMs</li>
+                      </ul>
+                  </div>
+              </div>
+
+              <div class="education-entry">
+                  <div class="degree-title">Computer Scientist</div>
+                  <div class="institution-info">
+                      <div class="institution">Global Climate Forum</div>
+                      <div class="duration">09.2024 - 11.2024</div>
+                  </div>
+                  <div class="education-details">
+                      <ul>
+                          <li>Agent-based model of Opinion Dynamics</li>
+                          <li>Developed an interactive web application with possibility of varying model parameters</li>
+                      </ul>
+                  </div>
+              </div>
+
+              <div class="education-entry">
+                  <div class="degree-title">Student Research Assistant</div>
+                  <div class="institution-info">
+                      <div class="institution">Physics of Life - Dresden, DE</div>
+                      <div class="duration">05.2023 - 12.2023<br>05.2022 - 10.2022</div>
+                  </div>
+                  <div class="education-details">
+                      <ul>
+                          <li>Executed data analysis methodologies for biological fluid datasets with over 2400 features and identified 7% of total features for biological inferences</li>
+                          <li>Validated Topological Data Analysis ranked list, finding ~45% common features in the top 171</li>
+                          <li>Developed an image analysis pipeline for feature quantification with 87% accuracy</li>
+                      </ul>
+                  </div>
+              </div>
+
+            </div>
+        </section>
+
+        <section id="academia">
+            <div class="container">
+                <h2>Academia</h2>
+                
+                <div class="education-entry">
+                    <div class="degree-title">M.S - Computational Modeling & Simulation</div>
+                    <div class="institution-info">
+                        <div class="institution">TU Dresden, DE</div>
+                        <div class="duration">10.2020 - 01.2024</div>
+                    </div>
+                    <div class="education-details">
+                        <ul>
+                            <li>Focus: AI, ML, Numerical & Statistical Modeling, Data Science</li>
+                            <li>Dissertation on "Detecting Patterns in 'omics data"</li>
+                            <li>Overall Grade: 2.0</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="education-entry">
+                    <div class="degree-title">B.Tech - Mechanical Engineering</div>
+                    <div class="institution-info">
+                        <div class="institution">PDPU Gandhinagar, IN</div>
+                        <div class="duration">08.2015 - 06.2019</div>
+                    </div>
+                    <div class="education-details">
+                        <ul>
+                            <li>Focus: Calculus, Tensor algebra, Optimization, Programming, Mechanics & Physics</li>
+                            <li>Overall Grade: 9.09 out of 10 (German equivalent: 1.46)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="projects">
+          <div class="container">
+              <h2>Projects</h2>
+              
+              <div class="projects-grid">
+                  <div class="project-card">
+                      <div class="project-content">
+                          <div class="project-icon">
+                              <i class="fa-solid fa-earth-europe"></i>
+                          </div>
+                          <h3>Global News Summarizer</h3>
+                          <div class="tech-tags">
+                              <span>Python</span>
+                              <span>JS</span>
+                              <span>HTML</span>
+                          </div>
+                          <p>Developed an LLM-powered news summarizer with web scraping and geolocation inference, visualizing headlines dynamically.</p>
+                          <div class="project-links">
+                              <a href="https://global-news-navigator.netlify.app/" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="project-card">
+                      <div class="project-content">
+                          <div class="project-icon">
+                              <i class="fa-solid fa-circle-nodes"></i>
+                          </div>
+                          <h3>Master’s Thesis: Detecting Patterns in 'Omics Data</h3>
+                          <div class="tech-tags">
+                              <span>Pandas</span>
+                              <span>Scikit-learn</span>
+                              <span>TDA</span>
+                          </div>
+                          <p>Classified biological samples using non-linear dimensional reduction, identifying 9 key features from 2500+ attributes.</p>
+                      </div>
+                  </div>
+                  
+                  <div class="project-card">
+                      <div class="project-content">
+                          <div class="project-icon">
+                              <i class="fa-solid fa-people-group"></i>
+                          </div>
+                          <h3>Opinion Dynamics Simulator</h3>
+                          <div class="tech-tags">
+                              <span>Python</span>
+                              <span>JS</span>
+                              <span>HTML</span>
+                          </div>
+                          <p>Created an interactive web application to simulate and visualize how opinions spread through social networks under various parameter conditions.</p>
+                          <div class="project-links">
+                              <a href="https://hk-opinion-dynamics-model.netlify.app/page2" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="project-card">
+                      <div class="project-content">
+                          <div class="project-icon">
+                              <i class="fa-solid fa-dna"></i>
+                          </div>
+                          <h3>Research Project: Quantitative Modeling of Protein Sensitivity</h3>
+                          <div class="tech-tags">
+                              <span>Pandas</span>
+                              <span>Scikit-learn</span>
+                              <span>Plotly - DASH</span>
+                          </div>
+                          <p>Developed models to classify cell behavior with R² = 0.59, improving accuracy by 20% using non-linear ML techniques and bootstrapping.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>        
+        </section>
+    </div>
+
+    <div class="toggle-container">
+        <button class="toggle-btn" onclick="toggleLightMode()">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <script>
+        function toggleLightMode() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+          const projectCards = document.querySelectorAll('.project-card');
+          
+          projectCards.forEach(card => {
+              card.addEventListener('mouseenter', function() {
+                  this.style.transform = 'translateY(-10px)';
+              });
+              
+              card.addEventListener('mouseleave', function() {
+                  this.style.transform = 'translateY(0)';
+              });
+          });
+      });
+    </script>
+
     
-  <!-- hero area -->
-  <section class="hero-area bg-primary" id="parallax">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-11 mx-auto">
-                <h1 class="text-white font-tertiary">Hi! I am<br>Purva<br>Data Scientist</h1>
-            </div>
-        </div>
-    </div>
-    <div class="layer-bg w-100">
-        <img class="img-fluid w-100" src="images/illustrations/leaf-bg.png" alt="bg-shape">
-    </div>
-    <!-- social icon -->
-    <ul class="list-unstyled ml-5 mt-3 position-relative zindex-1">
-        <li class="mb-3"><a class="text-white" href="https://github.com/Purva117" target="_blank"><i class="ti-github"></i></a></li>
-        <li class="mb-3"><a class="text-white" href="https://www.linkedin.com/in/purvapatel117/" target="_blank"><i class="ti-linkedin"></i></a></li>
-        <li class="mb-3"><a class="text-white" href="mailto:purva.informatik@gmail.com" target="_blank"><i class="ti-email"></i></a></li>
-        <li class="mb-3"><a class="text-white" href="#footer"><i class="ti-more-alt"></i></a></li>
-    </ul>
-    <!-- /social icon -->
-  </section>
-  <!-- /hero area -->
-
-  <!-- about -->
-  <section class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-10 mx-auto text-center">
-          <p class="font-secondary paragraph-lg text-dark">Welcome to my corner of the web! I’m Purva Patel, 
-            your go-to data enthusiast with a passion for turning numbers into narratives. Armed with a love for 
-            mathematical modeling, machine learning, and all things Python, I dive deep into datasets to unearth 
-            their secrets and spark innovation. When I’m not coding or exploring the latest in AI, you might find 
-            me strategizing over a chessboard, hiking to new heights, or getting creative with a paintbrush. Join 
-            me on this journey where data meets discovery and let’s make some magic happen!</p>
-          <a href="about.html" class="btn btn-transparent">know more</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- /about -->
-
-  <!-- Experience Section -->
-  <section id="experience" class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="section-title">Experience</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <ul class="timeline">
-            <li>
-              <div class="timeline-image">
-                <img class="img-circle img-responsive" src="images/experience/icon-1.png" alt="SHK1">
-              </div>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  <h4>MAY 2023 - DEC 2023</h4>
-                  <h4 class="subheading">Student Research Assistant</h4>
-                  <h5 class="text-dark">Physics of Life - Dresden, DE</h5>
-                </div>
-                <div class="timeline-body">
-                  <p class="text">Conducted in-depth data analysis on complex biological datasets to identify key features relevant to specific biological processes and contributed to the validation of advanced data analysis techniques, enhancing the understanding of critical dataset features.</p>
-                </div>
-              </div>
-            </li>
-            <li class="timeline-inverted">
-              <div class="timeline-image">
-                <img class="img-circle img-responsive" src="images/experience/icon-3.png" alt="Thesis">
-              </div>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  <h4>JUN 2023 - NOV 2023</h4>
-                  <h4 class="subheading">Master's Thesis</h4>
-                  <h5 class="text-dark">Physics of Life - Dresden, DE</h5>
-                </div>
-                <div class="timeline-body">
-                  <p class="text">Developed and applied advanced data analysis techniques to uncover patterns in complex biological datasets. Achieved high classification accuracy by leveraging non-linear dimensional reduction methods and identified critical features that describe underlying biological processes. Additionally, evaluated the impact of different distance metrics on Topological Data Analysis, contributing to more accurate data interpretation.</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="timeline-image">
-                <img class="img-circle img-responsive" src="images/experience/icon-1.png" alt="SHK2">
-              </div>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  <h4>MAY 2022 - OCT 2022</h4>
-                  <h4 class="subheading">Student Research Assistant</h4>
-                  <h5 class="text-dark">Physics of Life - Dresden, DE</h5>
-                </div>
-                <div class="timeline-body">
-                  <p class="text">Optimized and expanded a scientific data repository by aggregating information from numerous sources. Developed tools and methodologies to improve the accuracy of data-driven models, focusing on key feature identification and image analysis.</p>
-                </div>
-              </div>
-            </li>
-            <li class="timeline-inverted">
-              <div class="timeline-image">
-                <img class="img-circle img-responsive" src="images/experience/icon-2.png" alt="Research_Project">
-              </div>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  <h4>NOV 2021 - MAR 2022</h4>
-                  <h4 class="subheading">Research Project</h4>
-                  <h5 class="text-dark">Physics of Life - Dresden, DE</h5>
-                </div>
-                <div class="timeline-body">
-                  <p class="text">Focused on modeling and classifying cellular behavior based on protein sensitivity data. Improved model performance through the application of machine learning techniques and comprehensive evaluation of data variability. This work led to enhanced predictive accuracy and deeper insights into protein behavior across different cell types.</p>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ./Experience Section -->
-
-  <!-- Academia -->
-  <section class="section position-relative">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="section-title">Education</h2>
-        </div>
-        <div class="col-lg-6 col-md-6 mb-80">
-          <div class="d-flex">
-            <div class="mr-lg-5 mr-3">
-              <i class="ti-medall icon icon-dark icon-bg shadow rounded-circle d-block custom-bg-color"></i>
-            </div>
-            <div>
-              <p class="text-dark mb-1">OCT 2020 - JAN 2024</p>
-              <h4>M.S. Computational Modeling and Simulation</h4>
-              <p class="mb-0 text-dark">TU Dresden</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-6 mb-80">
-          <div class="d-flex">
-            <div class="mr-lg-5 mr-3">
-              <i class="ti-medall icon icon-dark icon-bg shadow rounded-circle d-block custom-bg-color"></i>
-            </div>
-            <div>
-              <p class="text-dark mb-1">AUG 2015 - JUN 2019</p>
-              <h4>B.Tech Mechanical<br>Engineering</h4>
-              <p class="mb-0 text-dark">Pandit Deendayal Petroleum University</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- bg image -->
-    <!-- <img class="img-fluid edu-bg-image" src="images/backgrounds/map.png" alt="bg-image"> -->
-  </section>
-  <!-- /academia -->
-
-  <!-- skills -->
-  <section class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="section-title">Skills</h2>
-        </div>
-        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
-          <div class="card shadow text-center">
-            <div class="position-relative rounded-top progress-wrapper" data-color="#83c0b1">
-              <div class="wave" data-progress="90%"></div>
-            </div>
-            <div class="card-footer">
-              <h4 class="card-title">MODELING</h4>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
-          <div class="card shadow text-center">
-            <div class="position-relative rounded-top progress-wrapper" data-color="#fbd46d">
-              <div class="wave" data-progress="85%"></div>
-            </div>
-            <div class="card-footer">
-              <h4 class="card-title">MACHINE LEARNING</h4>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
-          <div class="card shadow text-center">
-            <div class="position-relative rounded-top progress-wrapper" data-color="#f19ed2">
-              <div class="wave" data-progress="75%"></div>
-            </div>
-            <div class="card-footer">
-              <h4 class="card-title">VISUALIZATION</h4>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
-          <div class="card shadow text-center">
-            <div class="position-relative rounded-top progress-wrapper" data-color="#ffbcaa">
-              <div class="wave" data-progress="82%"></div>
-            </div>
-            <div class="card-footer">
-              <h4 class="card-title">PROGRAMMING</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- /skills -->
-
-  <!-- skills logo slider -->
-  <section class="section pb-0">
-    <div class="container">
-      <div class="client-logo-slider d-flex align-items-center">
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-            src="images/clients-logo/client-logo-1.png" alt="client-logo"></a>
-      
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-            src="images/clients-logo/client-logo-3.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-            src="images/clients-logo/client-logo-4.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-            src="images/clients-logo/client-logo-5.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-          src="images/clients-logo/client-logo-6.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-          src="images/clients-logo/client-logo-7.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-          src="images/clients-logo/client-logo-8.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-          src="images/clients-logo/client-logo-9.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-            src="images/clients-logo/client-logo-1.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-            src="images/clients-logo/client-logo-3.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-            src="images/clients-logo/client-logo-4.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-            src="images/clients-logo/client-logo-5.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-          src="images/clients-logo/client-logo-6.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-          src="images/clients-logo/client-logo-7.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-          src="images/clients-logo/client-logo-8.png" alt="client-logo"></a>
-
-        <a href="portfolio.html" class="text-center d-block outline-0 p-4"><img class="d-unset img-fluid"
-          src="images/clients-logo/client-logo-9.png" alt="client-logo"></a>
-      </div>
-    </div>
-  </section>
-  <!-- /client logo slider -->
-
-  <!-- solutions -->
-  <section class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-          <h2 class="section-title">Solutions</h2>
-        </div>
-        <div class="col-md-4 mb-4 mb-md-0">
-          <div class="card active-bg-primary hover-shadow shadow">
-            <div class="card-body text-center px-4 py-5">
-              <i class="ti-infinite icon mb-5 d-inline-block"></i>
-              <h4 class="mb-4">Intelligent Systems</h4>
-              <p>Leverage advanced AI and machine learning techniques to forecast trends, optimize processes, 
-                and drive data-driven decision-making.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4 mb-md-0">
-          <div class="card active-bg-primary hover-shadow shadow">
-            <div class="card-body text-center px-4 py-5">
-              <i class="ti-stats-up icon mb-5 d-inline-block"></i>
-              <h4 class="mb-4">Advanced Data Modeling</h4>
-              <p>Utilize sophisticated statistical modeling and machine learning techniques to reveal hidden patterns 
-                from complex datasets, and derive actionable insights.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4 mb-md-0">
-          <div class="card active-bg-primary hover-shadow shadow">
-            <div class="card-body text-center px-4 py-5">
-              <i class="ti-bar-chart icon mb-5 d-inline-block"></i>
-              <h4 class="mb-4">Data Visualization</h4>
-              <p>Bring data to life with compelling visualizations and narratives, making complex information 
-                accessible and engaging.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>  
-  <!-- /solutions -->
-
-  <!-- portfolio -->
-  <section class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-          <h2 class="section-title">Portfolio</h2>
-        </div>
-      </div>
-      <div class="row shuffle-wrapper">
-        <div class="col-lg-4 col-6 mb-4 shuffle-item">
-          <div class="position-relative hover-wrapper">
-            <img src="images/portfolio/item-1.png" alt="portfolio-image" class="img-fluid rounded w-100">
-            <div class="hover-overlay">
-              <div class="hover-content">
-                <a class="btn btn-light btn-sm" href="portfolio.html#proj_1">Know More</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-6 mb-4 shuffle-item">
-          <div class="position-relative hover-wrapper">
-            <img src="images/portfolio/item-2.png" alt="portfolio-image" class="img-fluid rounded w-100">
-            <div class="hover-overlay">
-              <div class="hover-content">
-                <a class="btn btn-light btn-sm" href="portfolio.html#proj_2">Know More</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-6 mb-4 shuffle-item">
-          <div class="position-relative hover-wrapper">
-            <img src="images/portfolio/item-4.png" alt="portfolio-image" class="img-fluid rounded w-100">
-            <div class="hover-overlay">
-              <div class="hover-content">
-                <a class="btn btn-light btn-sm" href="portfolio.html#proj_4">Know More</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-6 mb-4 shuffle-item">
-          <div class="position-relative hover-wrapper">
-            <img src="images/portfolio/item-3.png" alt="portfolio-image" class="img-fluid rounded w-100">
-            <div class="hover-overlay">
-              <div class="hover-content">
-                <a class="btn btn-light btn-sm" href="portfolio.html#proj_3">Know More</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="col-lg-4 col-6 mb-4 shuffle-item">
-          <div class="position-relative hover-wrapper">
-            <img src="images/portfolio/item-5.png" alt="portfolio-image" class="img-fluid rounded w-100">
-            <div class="hover-overlay">
-              <div class="hover-content">
-                <a class="btn btn-light btn-sm" href="#!">view project</a>
-              </div>
-            </div>
-          </div>
-        </div> -->
-      </div>
-    </div>
-  </section>
-  <!-- /portfolio -->
-
-  <!-- testimonial -->
-  <!-- <section class="section bg-primary position-relative testimonial-bg-shapes">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-          <h2 class="section-title text-white mb-5">Testimonials</h2>
-        </div>
-        <div class="col-lg-10 mx-auto testimonial-slider">
-
-          <div class="text-center testimonial-content">
-            <i class="ti-quote-right text-white icon mb-4 d-inline-block"></i>
-            <p class="text-white mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <strong>quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat.</strong> Duis aute irure dolor in reprehenderit
-              in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <img class="img-fluid rounded-circle mb-4 d-inline-block" src="images/testimonial/client-1.png"
-              alt="client-image">
-            <h4 class="text-white">Jesica Gomez</h4>
-            <h6 class="text-light mb-4">CEO, Funder</h6>
-          </div>
-
-          <div class="text-center testimonial-content">
-            <i class="ti-quote-right text-white icon mb-4 d-inline-block"></i>
-            <p class="text-white mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <strong>quis nostrud exercitation
-                ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</strong> Duis aute irure dolor in reprehenderit in
-              voluptate velit
-              esse cillum dolore eu fugiat nulla pariatur.</p>
-            <img class="img-fluid rounded-circle mb-4 d-inline-block" src="images/testimonial/client-1.png"
-              alt="client-image">
-            <h4 class="text-white">Jesica Gomez</h4>
-            <h6 class="text-light mb-4">CEO, Funder</h6>
-          </div>
-
-          <div class="text-center testimonial-content">
-            <i class="ti-quote-right text-white icon mb-4 d-inline-block"></i>
-            <p class="text-white mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <strong>quis nostrud exercitation
-                ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</strong> Duis aute irure dolor in reprehenderit in
-              voluptate velit
-              esse cillum dolore eu fugiat nulla pariatur.</p>
-            <img class="img-fluid rounded-circle mb-4 d-inline-block" src="images/testimonial/client-1.png"
-              alt="client-image">
-            <h4 class="text-white">Jesica Gomez</h4>
-            <h6 class="text-light mb-4">CEO, Funder</h6>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <img src="images/backgrounds/map.png" alt="map" class="img-fluid bg-map">
-  </section> -->
-  <!-- /testimonial -->
-
-  <!-- blog -->
-  <!-- <section class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-          <h2 class="section-title">Blogs</h2>
-        </div>
-        <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-          <article class="card shadow">
-            <img class="rounded card-img-top" src="images/blog/post-3.jpg" alt="post-thumb">
-            <div class="card-body">
-              <h4 class="card-title"><a class="text-dark" href="blog-single.html">Amazon increase income 1.5 Million</a>
-              </h4>
-              <p class="cars-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt ut labore et
-                dolore magna aliqua.</p>
-              <a href="blog-single.html" class="btn btn-xs btn-primary">Read More</a>
-            </div>
-          </article>
-        </div>
-        <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-          <article class="card shadow">
-            <img class="rounded card-img-top" src="images/blog/post-4.jpg" alt="post-thumb">
-            <div class="card-body">
-              <h4 class="card-title"><a class="text-dark" href="blog-single.html">Amazon increase income 1.5 Million</a>
-              </h4>
-              <p class="cars-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt ut labore et
-                dolore magna aliqua.</p>
-              <a href="blog-single.html" class="btn btn-xs btn-primary">Read More</a>
-            </div>
-          </article>
-        </div>
-        <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-          <article class="card shadow">
-            <img class="rounded card-img-top" src="images/blog/post-2.jpg" alt="post-thumb">
-            <div class="card-body">
-              <h4 class="card-title"><a class="text-dark" href="blog-single.html">Amazon increase income 1.5 Million</a>
-              </h4>
-              <p class="cars-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt ut labore et
-                dolore magna aliqua.</p>
-              <a href="blog-single.html" class="btn btn-xs btn-primary">Read More</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section> -->
-  <!-- /blog -->
-
-  <!-- contact -->
-  <!-- <section class="section section-on-footer" data-background="images/backgrounds/bg-dots.png">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-          <h2 class="section-title">Contact Info</h2>
-        </div>
-        <div class="col-lg-8 mx-auto">
-          <div class="bg-white rounded text-center p-5 shadow-down">
-            <h4 class="mb-80">Contact Form</h4>
-            <form action="#" class="row">
-              <div class="col-md-6">
-                <input type="text" id="name" name="name" placeholder="Full Name" class="form-control px-0 mb-4" required>
-              </div>
-              <div class="col-md-6">
-                <input type="email" id="email" name="email" placeholder="Email Address" class="form-control px-0 mb-4" required>
-              </div>
-              <div class="col-12">
-                <textarea name="message" id="message" class="form-control px-0 mb-4"
-                  placeholder="Type Message Here" required></textarea>
-              </div>
-              <div class="col-lg-6 col-10 mx-auto">
-                <button class="btn btn-primary w-100">send</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-  <!-- /contact -->
-
-  <!-- footer -->
-  <footer id="footer" class="bg-dark footer-section">
-    <div class="section">
-      <div class="container">
-        <div class="row justify-content-between">
-          <div class="col-md-4">
-            <h5 class="text-light">Email</h5>
-            <p class="text-white paragraph-lg font-secondary">purva.informatik@gmail.com</p>
-          </div>
-          <!-- <div class="col-md-4">
-            <h5 class="text-light">Phone</h5>
-            <p class="text-white paragraph-lg font-secondary">+880 2544 658 256</p>
-          </div> -->
-          <div class="col-md-4">
-            <h5 class="text-light">Location</h5>
-            <p class="text-white paragraph-lg font-secondary">Dresden, Saxony, Germany</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- /footer -->
-
-  <!-- jQuery -->
-  <script src="plugins/jQuery/jquery.min.js"></script>
-  <!-- Bootstrap JS -->
-  <script src="plugins/bootstrap/bootstrap.min.js"></script>
-  <!-- slick slider -->
-  <script src="plugins/slick/slick.min.js"></script>
-  <!-- filter -->
-  <script src="plugins/shuffle/shuffle.min.js"></script>
-
-  <!-- Main Script -->
-  <script src="js/script.js"></script>
 </body>
 </html>
