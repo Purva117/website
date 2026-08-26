@@ -1,743 +1,694 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purva Patel</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        body {
-            font-family: 'Nunito Sans';
-            line-height: 1.6;
-            color: #FCF5ED;
-            background-color: #1F1717;
-            overflow: hidden;
-        }
+  <title>Alex — AI Developer</title>
 
-        .light-mode {
-            background-color: #FCF5ED;
-            color: #1F1717;
-        }
+  <meta
+    name="description"
+    content="Personal website of Alex, an AI developer building software, intelligent systems, and experiments."
+  />
 
-        .left-pane {
-            font-family: 'Montserrat', sans-serif;
-            width: 30%;
-            height: 100vh;
-            position: fixed;
-            background: #140F0F; /* Darker variant of #1F1717 */
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 10;
-        }
-
-        .light-mode .left-pane {
-            background: #F4BF96;
-            border-right: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .right-pane {
-            width: 70%;
-            margin-left: 30%;
-            height: 100vh;
-            overflow-y: auto;
-            scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
-        }
-
-        section {
-            min-height: 100vh;
-            padding: 4rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            scroll-snap-align: start;
-            background-color: #1F1717; /* Solid color, no gradient */
-        }
-
-        .light-mode section {
-            background-color: #FCF5ED; /* Solid color for light mode */
-        }
-
-        .toggle-container {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-        }
-
-        .toggle-btn {
-            width: 50px;
-            height: 50px;
-            border: none;
-            border-radius: 50%;
-            background: #140F0F;
-            color: #FCF5ED;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0px 6px #FCF5ED;
-            transition: background 0.3s ease;
-            position: relative;
-        }
-
-        .toggle-btn i {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.25rem;
-            transition: opacity 0.5s ease;
-        }
-
-        .toggle-btn .fa-sun {
-            opacity: 0;
-        }
-
-        .light-mode .toggle-btn {
-            background: #F4BF96;
-            color: #1F1717;
-            box-shadow: 0 0px 6px #1F1717;
-        }
-
-        .light-mode .toggle-btn .fa-moon {
-            opacity: 0;
-        }
-
-        .light-mode .toggle-btn .fa-sun {
-            opacity: 1;
-        }
-
-        .toggle-btn:hover {
-            background: #CE5A67;
-            color: #FCF5ED;
-        }
-
-        .profile-container h1 {
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .profile-container p {
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .profile-container .separator {
-            width: 100%;
-            height: 1px;
-            background: #CE5A67;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-icons {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .contact-icons a {
-            text-decoration: none;
-            font-size: 1.5rem;
-            color: #FCF5ED;
-            transition: all 0.3s ease;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .light-mode .contact-icons a {
-            color: #1F1717;
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        .contact-icons a:hover {
-            color: #FCF5ED;
-            background: #CE5A67;
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(206, 90, 103, 0.4);
-        }
-        
-        .light-mode .contact-icons a:hover {
-            color: #FCF5ED;
-        }
-
-        h2 {
-            color: #CE5A67;
-            margin-bottom: 1.5rem;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .light-mode h2 {
-            color: #CE5A67;
-        }
-
-        .container {
-            max-width: 800px;
-            padding: 0 1rem;
-        }
-
-        /* Academia section CV styling */
-        .education-entry {
-            margin-bottom: 2.5rem;
-            position: relative;
-        }
-
-        .degree-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .institution-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            font-style: italic;
-        }
-
-        .institution {
-            font-weight: 500;
-        }
-
-        .duration {
-            opacity: 0.9;
-        }
-
-        .education-details {
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .education-details::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background-color: #CE5A67;
-        }
-
-        .education-details ul {
-            list-style-type: none;
-        }
-
-        .education-details li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1rem;
-        }
-
-        .education-details li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #CE5A67;
-        }
-
-        /* Projects Section Styling */
-        #projects {
-            overflow: hidden;
-        }
-
-        .section-intro {
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
-            max-width: 650px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.4s ease;
-            height: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .light-mode .project-card {
-            background: rgba(0, 0, 0, 0.03);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(206, 90, 103, 0.2);
-            border-color: rgba(206, 90, 103, 0.3);
-        }
-
-        .project-content {
-            padding: 1.8rem;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-icon {
-            margin-bottom: 1.2rem;
-            font-size: 2rem;
-            color: #CE5A67;
-            display: inline-block;
-            width: 60px;
-            height: 60px;
-            line-height: 60px;
-            text-align: center;
-            border-radius: 50%;
-            background: rgba(206, 90, 103, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover .project-icon {
-            background: #CE5A67;
-            color: #FCF5ED;
-            transform: scale(1.1);
-        }
-
-        .project-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.25rem;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-            color: #FCF5ED;
-            transition: color 0.3s ease;
-        }
-
-        .light-mode .project-card h3 {
-            color: #1F1717;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tech-tags span {
-            font-size: 0.75rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 30px;
-            background: rgba(206, 90, 103, 0.2);
-            color: #CE5A67;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover .tech-tags span {
-            background: rgba(206, 90, 103, 0.3);
-        }
-
-        .project-card p {
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            flex-grow: 1;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: auto;
-        }
-
-        .project-link {
-            color: #FCF5ED;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: all 0.3s ease;
-            opacity: 0.8;
-        }
-
-        .light-mode .project-link {
-            color: #1F1717;
-        }
-
-        .project-link:hover {
-            color: #CE5A67;
-            opacity: 1;
-            transform: translateX(5px);
-        }
-
-        /* Add missing Font Awesome icon */
-        .fa-chart-network:before {
-            content: "\f64f"; /* Using analytics icon as a substitute */
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .project-card {
-                max-width: 100%;
-            }
-        }
-
-        /* Animation for cards */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .project-card {
-            animation: fadeInUp 0.6s ease backwards;
-        }
-
-        .project-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .project-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .project-card:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .project-card:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-        /* Mobile and responsive adjustments */
-        @media (max-width: 992px) {
-            .left-pane {
-                width: 40%;
-            }
-            .right-pane {
-                width: 60%;
-                margin-left: 40%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .left-pane {
-                width: 100%;
-                height: auto;
-                position: relative;
-                padding: 2rem 1rem;
-                min-height: 100vh;
-                scroll-snap-align: start;
-            }
-            .right-pane {
-                width: 100%;
-                margin-left: 0;
-                height: auto;
-            }
-            body {
-                overflow: auto;
-            }
-            .toggle-container {
-                bottom: 20px;
-                right: 20px;
-                left: auto;
-            }
-            /* Ensure scroll-snap still works */
-            html, body {
-                scroll-snap-type: y mandatory;
-                height: 100%;
-                overflow-y: auto;
-            }
-            section, .left-pane {
-                scroll-snap-align: start;
-                min-height: 100vh;
-            }
-        }
-
-        /* Small mobile adjustments */
-        @media (max-width: 480px) {
-            .profile-container h1 {
-                font-size: 1.8rem;
-            }
-            .contact-icons {
-                gap: 1rem;
-            }
-            .contact-icons a {
-                width: 40px;
-                height: 40px;
-                font-size: 1.3rem;
-            }
-            section {
-                padding: 2rem 1rem;
-            }
-        }
-
-        /* For very small screens */
-        @media (max-width: 320px) {
-            .profile-container h1 {
-                font-size: 1.5rem;
-            }
-            .contact-icons a {
-                width: 35px;
-                height: 35px;
-                font-size: 1.1rem;
-            }
-        }
-
-        /* Prevent content from being hidden behind sticky elements on iOS */
-        @supports (-webkit-touch-callout: none) {
-            section {
-                padding-bottom: 5rem;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    <div class="left-pane">
-        <div class="profile-container">
-            <h1>Purva Patel</h1>
-            <div class="separator"></div>
-            <p>AI Engineer</p>
-            <div class="contact-icons">
-              <a href="https://github.com/Purva117" target="_blank"><i class="fab fa-github"></i></a>
-              <a href="https://www.linkedin.com/in/purvapatel117/" target="_blank"><i class="fab fa-linkedin"></i></a>
-              <a href="mailto:purvapatel173@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+
+  <div class="site-shell">
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+
+    <header class="navbar">
+
+      <a href="#top" class="logo">
+        <span class="logo-mark">~/</span>alex<span class="cursor">_</span>
+      </a>
+
+      <nav>
+        <a href="#projects">projects</a>
+        <a href="#stack">stack</a>
+        <a href="#experience">experience</a>
+        <a href="#about">about</a>
+      </nav>
+
+      <a class="nav-status" href="#contact">
+        <span></span>
+        available
+      </a>
+
+    </header>
+
+
+    <main id="top">
+
+      <!-- =====================================================
+           HERO
+           ===================================================== -->
+
+      <section class="hero">
+
+        <div class="hero-grid"></div>
+
+        <div class="hero-content">
+
+          <div class="terminal-line">
+            <span class="prompt">visitor@alex.dev:~$</span>
+            <span id="terminal-command"></span>
+            <span class="terminal-cursor">▋</span>
           </div>
+
+          <p class="eyebrow">
+            AI DEVELOPER / SOFTWARE ENGINEER
+          </p>
+
+          <h1>
+            Building software<br />
+            <span>with intelligence.</span>
+          </h1>
+
+          <p class="hero-description">
+            I build applications, tools, and experiments at the intersection
+            of <strong>programming</strong> and <strong>AI</strong>.
+          </p>
+
+          <div class="hero-actions">
+
+            <a href="#projects" class="button button-primary">
+              view projects
+              <span>↘</span>
+            </a>
+
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noreferrer"
+              class="button"
+            >
+              github ↗
+            </a>
+
+          </div>
+
         </div>
-    </div>
 
-    <div class="right-pane">
-        <section id="hero">
-            <div class="container">
-              <h2>Namaste! I'm Purva.</h2>
-              <p>I’m an AI Engineer focused on solving real-world problems and improving productivity to make life easier. With a background in Computational Modeling and Simulation, I break down complex data into meaningful insights. My expertise includes large language models (LLMs), retrieval-augmented generation (RAG), and automation, primarily using Python and deep learning frameworks.<br><br>Beyond work, I enjoy chess, hiking, and art—always up for a challenge, whether on a chessboard, a mountain trail, or a blank canvas. Let’s connect and build something great!</p>
+
+        <div class="hero-decoration">
+
+          <div class="code-window">
+
+            <div class="window-bar">
+              <span></span>
+              <span></span>
+              <span></span>
+
+              <small>agent.py</small>
             </div>
-        </section>
-        
-        <section id="work-expereince">
-            <div class="container">
-                <h2>Work Experience</h2>
 
-                <div class="education-entry">
-                  <div class="degree-title">AI Engineer</div>
-                  <div class="institution-info">
-                      <div class="institution">GUTcert</div>
-                      <div class="duration">12.2024 - Present</div>
-                  </div>
-                  <div class="education-details">
-                      <ul>
-                          <li>Developing and integrating AI solutions to assist redundant and repetitive processes</li>
-                          <li>Addressing variety of state-of-the-art techniques including RAG, RAFT and custom fine-tuning of LLMs</li>
-                      </ul>
-                  </div>
+            <pre><code><span class="code-keyword">class</span> <span class="code-name">Agent</span>:
+    <span class="code-keyword">def</span> <span class="code-function">think</span>(self, task):
+        context = self.<span class="code-function">retrieve</span>(task)
+        plan = self.<span class="code-function">reason</span>(context)
+
+        <span class="code-keyword">return</span> self.<span class="code-function">execute</span>(plan)</code></pre>
+
+          </div>
+
+        </div>
+
+
+        <div class="scroll-indicator">
+          <span></span>
+          scroll to explore
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           PROJECTS
+           ===================================================== -->
+
+      <section id="projects" class="section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-number">01</span>
+            <h2>/projects</h2>
+          </div>
+
+          <p>Things I've built, broken, and rebuilt.</p>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+          <article class="project featured">
+
+            <div class="project-top">
+              <span class="project-number">01</span>
+              <span class="project-type">AI / PRODUCT</span>
+            </div>
+
+            <h3>Neural Notes</h3>
+
+            <p>
+              An AI-powered knowledge system that turns scattered notes
+              into a searchable, connected second brain.
+            </p>
+
+            <div class="tags">
+              <span>Python</span>
+              <span>LLMs</span>
+              <span>RAG</span>
+              <span>Postgres</span>
+            </div>
+
+            <a href="#" class="project-link">
+              explore project <span>↗</span>
+            </a>
+
+          </article>
+
+
+          <article class="project">
+
+            <div class="project-top">
+              <span class="project-number">02</span>
+              <span class="project-type">EXPERIMENT</span>
+            </div>
+
+            <h3>Agent Lab</h3>
+
+            <p>
+              A collection of experiments exploring autonomous agents,
+              tool use, planning, memory, and multi-agent systems.
+            </p>
+
+            <div class="tags">
+              <span>Python</span>
+              <span>Agents</span>
+              <span>Tools</span>
+            </div>
+
+            <a href="#" class="project-link">
+              explore project <span>↗</span>
+            </a>
+
+          </article>
+
+
+          <article class="project">
+
+            <div class="project-top">
+              <span class="project-number">03</span>
+              <span class="project-type">SYSTEMS</span>
+            </div>
+
+            <h3>Compiler X</h3>
+
+            <p>
+              A small programming language and compiler built from scratch
+              to understand parsing, ASTs, and code generation.
+            </p>
+
+            <div class="tags">
+              <span>C++</span>
+              <span>LLVM</span>
+              <span>Compilers</span>
+            </div>
+
+            <a href="#" class="project-link">
+              explore project <span>↗</span>
+            </a>
+
+          </article>
+
+
+          <article class="project">
+
+            <div class="project-top">
+              <span class="project-number">04</span>
+              <span class="project-type">OPEN SOURCE</span>
+            </div>
+
+            <h3>Prompt Forge</h3>
+
+            <p>
+              A developer tool for testing, comparing, and versioning
+              prompts and model outputs.
+            </p>
+
+            <div class="tags">
+              <span>TypeScript</span>
+              <span>LLMs</span>
+              <span>CLI</span>
+            </div>
+
+            <a href="#" class="project-link">
+              explore project <span>↗</span>
+            </a>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           STACK
+           ===================================================== -->
+
+      <section id="stack" class="section stack-section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-number">02</span>
+            <h2>/stack</h2>
+          </div>
+
+          <p>The tools I like to build with.</p>
+
+        </div>
+
+
+        <div class="stack-container">
+
+          <div class="stack-group">
+
+            <span class="stack-label">
+              languages
+            </span>
+
+            <div class="stack-items">
+              <span>Python</span>
+              <span>TypeScript</span>
+              <span>JavaScript</span>
+              <span>C++</span>
+              <span>SQL</span>
+              <span>Bash</span>
+            </div>
+
+          </div>
+
+
+          <div class="stack-group">
+
+            <span class="stack-label">
+              AI / ML
+            </span>
+
+            <div class="stack-items">
+              <span>LLMs</span>
+              <span>RAG</span>
+              <span>Agents</span>
+              <span>Embeddings</span>
+              <span>PyTorch</span>
+              <span>Transformers</span>
+            </div>
+
+          </div>
+
+
+          <div class="stack-group">
+
+            <span class="stack-label">
+              infrastructure
+            </span>
+
+            <div class="stack-items">
+              <span>Linux</span>
+              <span>Docker</span>
+              <span>Postgres</span>
+              <span>Redis</span>
+              <span>Git</span>
+              <span>Cloud</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Currently -->
+
+        <div class="currently">
+
+          <div class="currently-header">
+
+            <span class="currently-dot"></span>
+
+            <span>
+              /currently
+            </span>
+
+          </div>
+
+          <div class="currently-content">
+
+            <div class="currently-main">
+
+              <span class="currently-label">
+                working on
+              </span>
+
+              <strong>
+                AI agents & developer tools
+              </strong>
+
+            </div>
+
+            <div class="currently-meta">
+
+              <div>
+                <span>learning</span>
+                <strong>LLM systems</strong>
               </div>
 
-              <div class="education-entry">
-                  <div class="degree-title">Computer Scientist</div>
-                  <div class="institution-info">
-                      <div class="institution">Global Climate Forum</div>
-                      <div class="duration">09.2024 - 11.2024</div>
-                  </div>
-                  <div class="education-details">
-                      <ul>
-                          <li>Agent-based model of Opinion Dynamics</li>
-                          <li>Developed an interactive web application with possibility of varying model parameters</li>
-                      </ul>
-                  </div>
+              <div>
+                <span>exploring</span>
+                <strong>local models</strong>
               </div>
 
-              <div class="education-entry">
-                  <div class="degree-title">Student Research Assistant</div>
-                  <div class="institution-info">
-                      <div class="institution">Physics of Life - Dresden, DE</div>
-                      <div class="duration">05.2023 - 12.2023<br>05.2022 - 10.2022</div>
-                  </div>
-                  <div class="education-details">
-                      <ul>
-                          <li>Executed data analysis methodologies for biological fluid datasets with over 2400 features and identified 7% of total features for biological inferences</li>
-                          <li>Validated Topological Data Analysis ranked list, finding ~45% common features in the top 171</li>
-                          <li>Developed an image analysis pipeline for feature quantification with 87% accuracy</li>
-                      </ul>
-                  </div>
+              <div>
+                <span>location</span>
+                <strong>somewhere on earth</strong>
               </div>
 
             </div>
-        </section>
 
-        <section id="academia">
-            <div class="container">
-                <h2>Academia</h2>
-                
-                <div class="education-entry">
-                    <div class="degree-title">M.S - Computational Modeling & Simulation</div>
-                    <div class="institution-info">
-                        <div class="institution">TU Dresden, DE</div>
-                        <div class="duration">10.2020 - 01.2024</div>
-                    </div>
-                    <div class="education-details">
-                        <ul>
-                            <li>Focus: AI, ML, Numerical & Statistical Modeling, Data Science</li>
-                            <li>Dissertation on "Detecting Patterns in 'omics data"</li>
-                            <li>Overall Grade: 2.0</li>
-                        </ul>
-                    </div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           EXPERIENCE / CV
+           ===================================================== -->
+
+      <section id="experience" class="section experience-section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-number">03</span>
+            <h2>/experience</h2>
+          </div>
+
+          <p>A short version of my CV.</p>
+
+        </div>
+
+
+        <div class="experience-list">
+
+
+          <!-- Experience 1 -->
+
+          <article class="experience-item">
+
+            <div class="experience-date">
+              2025 — now
+            </div>
+
+            <div class="experience-content">
+
+              <div class="experience-heading">
+
+                <div>
+                  <h3>AI Developer</h3>
+                  <span>Company / Freelance</span>
                 </div>
 
-                <div class="education-entry">
-                    <div class="degree-title">B.Tech - Mechanical Engineering</div>
-                    <div class="institution-info">
-                        <div class="institution">PDPU Gandhinagar, IN</div>
-                        <div class="duration">08.2015 - 06.2019</div>
-                    </div>
-                    <div class="education-details">
-                        <ul>
-                            <li>Focus: Calculus, Tensor algebra, Optimization, Programming, Mechanics & Physics</li>
-                            <li>Overall Grade: 9.09 out of 10 (German equivalent: 1.46)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <span class="experience-location">
+                  remote
+                </span>
 
-
-        <section id="projects">
-          <div class="container">
-              <h2>Projects</h2>
-              
-              <div class="projects-grid">
-                  <div class="project-card">
-                      <div class="project-content">
-                          <div class="project-icon">
-                              <i class="fa-solid fa-earth-europe"></i>
-                          </div>
-                          <h3>Global News Summarizer</h3>
-                          <div class="tech-tags">
-                              <span>Python</span>
-                              <span>JS</span>
-                              <span>HTML</span>
-                          </div>
-                          <p>Developed an LLM-powered news summarizer with web scraping and geolocation inference, visualizing headlines dynamically.</p>
-                          <div class="project-links">
-                              <a href="https://global-news-navigator.netlify.app/" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
-                          </div>
-                      </div>
-                  </div>
-                  
-                  <div class="project-card">
-                      <div class="project-content">
-                          <div class="project-icon">
-                              <i class="fa-solid fa-circle-nodes"></i>
-                          </div>
-                          <h3>Master’s Thesis: Detecting Patterns in 'Omics Data</h3>
-                          <div class="tech-tags">
-                              <span>Pandas</span>
-                              <span>Scikit-learn</span>
-                              <span>TDA</span>
-                          </div>
-                          <p>Classified biological samples using non-linear dimensional reduction, identifying 9 key features from 2500+ attributes.</p>
-                      </div>
-                  </div>
-                  
-                  <div class="project-card">
-                      <div class="project-content">
-                          <div class="project-icon">
-                              <i class="fa-solid fa-people-group"></i>
-                          </div>
-                          <h3>Opinion Dynamics Simulator</h3>
-                          <div class="tech-tags">
-                              <span>Python</span>
-                              <span>JS</span>
-                              <span>HTML</span>
-                          </div>
-                          <p>Created an interactive web application to simulate and visualize how opinions spread through social networks under various parameter conditions.</p>
-                          <div class="project-links">
-                              <a href="https://hk-opinion-dynamics-model.netlify.app/page2" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                          </div>
-                      </div>
-                  </div>
-                  
-                  <div class="project-card">
-                      <div class="project-content">
-                          <div class="project-icon">
-                              <i class="fa-solid fa-dna"></i>
-                          </div>
-                          <h3>Research Project: Quantitative Modeling of Protein Sensitivity</h3>
-                          <div class="tech-tags">
-                              <span>Pandas</span>
-                              <span>Scikit-learn</span>
-                              <span>Plotly - DASH</span>
-                          </div>
-                          <p>Developed models to classify cell behavior with R² = 0.59, improving accuracy by 20% using non-linear ML techniques and bootstrapping.</p>
-                      </div>
-                  </div>
               </div>
-          </div>        
-        </section>
-    </div>
 
-    <div class="toggle-container">
-        <button class="toggle-btn" onclick="toggleLightMode()">
-            <i class="fas fa-moon"></i>
-            <i class="fas fa-sun"></i>
-        </button>
-    </div>
+              <p>
+                Building AI-powered applications and developer tooling,
+                with a focus on reliable LLM systems, automation, and
+                useful interfaces around models.
+              </p>
 
-    <script>
-        function toggleLightMode() {
-            document.body.classList.toggle('light-mode');
-        }
+              <div class="experience-tags">
+                <span>Python</span>
+                <span>LLMs</span>
+                <span>APIs</span>
+                <span>Agents</span>
+              </div>
 
-        document.addEventListener('DOMContentLoaded', function() {
-          const projectCards = document.querySelectorAll('.project-card');
-          
-          projectCards.forEach(card => {
-              card.addEventListener('mouseenter', function() {
-                  this.style.transform = 'translateY(-10px)';
-              });
-              
-              card.addEventListener('mouseleave', function() {
-                  this.style.transform = 'translateY(0)';
-              });
-          });
-      });
-    </script>
+            </div>
 
-    
+          </article>
+
+
+          <!-- Experience 2 -->
+
+          <article class="experience-item">
+
+            <div class="experience-date">
+              2023 — 2025
+            </div>
+
+            <div class="experience-content">
+
+              <div class="experience-heading">
+
+                <div>
+                  <h3>Software Engineer</h3>
+                  <span>Company</span>
+                </div>
+
+                <span class="experience-location">
+                  hybrid
+                </span>
+
+              </div>
+
+              <p>
+                Designed and maintained backend systems, APIs, databases,
+                and internal developer tooling for production software.
+              </p>
+
+              <div class="experience-tags">
+                <span>TypeScript</span>
+                <span>Node.js</span>
+                <span>Postgres</span>
+                <span>Docker</span>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- Experience 3 -->
+
+          <article class="experience-item">
+
+            <div class="experience-date">
+              2020 — 2023
+            </div>
+
+            <div class="experience-content">
+
+              <div class="experience-heading">
+
+                <div>
+                  <h3>Computer Science</h3>
+                  <span>University</span>
+                </div>
+
+                <span class="experience-location">
+                  education
+                </span>
+
+              </div>
+
+              <p>
+                Studied computer science with a particular interest in
+                systems programming, machine learning, algorithms,
+                and software architecture.
+              </p>
+
+              <div class="experience-tags">
+                <span>C++</span>
+                <span>Algorithms</span>
+                <span>ML</span>
+                <span>Systems</span>
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+
+        <div class="cv-download">
+
+          <a href="cv.pdf" class="button" download>
+            download cv.pdf
+            <span>↓</span>
+          </a>
+
+          <span>
+            A longer version of my experience, education & skills.
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           ABOUT
+           ===================================================== -->
+
+      <section id="about" class="section about-section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-number">04</span>
+            <h2>/about</h2>
+          </div>
+
+        </div>
+
+
+        <div class="about-grid">
+
+          <div class="about-large">
+
+            <p>
+              I'm an AI-focused developer who enjoys understanding how
+              things work <em>under the hood</em>.
+            </p>
+
+            <p>
+              My interests sit somewhere between software engineering,
+              machine intelligence, developer tools, and systems programming.
+            </p>
+
+          </div>
+
+
+          <div class="about-small">
+
+            <div class="fact">
+              <span>currently</span>
+              <strong>building with AI</strong>
+            </div>
+
+            <div class="fact">
+              <span>location</span>
+              <strong>somewhere on earth</strong>
+            </div>
+
+            <div class="fact">
+              <span>status</span>
+              <strong class="green">● available</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           CONTACT
+           ===================================================== -->
+
+      <section id="contact" class="contact-section">
+
+        <div class="contact-terminal">
+
+          <div class="terminal-header">
+
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+
+            <span class="terminal-title">
+              contact.sh
+            </span>
+
+          </div>
+
+
+          <div class="contact-content">
+
+            <span class="prompt">
+              alex@dev:~$
+            </span>
+
+            <h2>
+              Let's build something.
+            </h2>
+
+            <p>
+              Have an interesting idea, project, or AI experiment?
+              I'm always interested in talking.
+            </p>
+
+            <a
+              href="mailto:hello@example.com"
+              class="email-link"
+            >
+              hello@example.com
+              <span>↗</span>
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer>
+
+      <span>
+        © <span id="year"></span> Alex
+      </span>
+
+      <span class="footer-middle">
+        made with
+        <span>html</span> +
+        <span>css</span> +
+        <span>js</span>
+      </span>
+
+      <a href="#top">
+        back to top ↑
+      </a>
+
+    </footer>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
 </body>
 </html>
