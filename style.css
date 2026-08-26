@@ -333,9 +333,14 @@ h1 span {
 .hero-decoration {
   position: relative;
   z-index: 1;
+
+  display: flex;
+  justify-content: center;
 }
 
 .code-window {
+  width: 100%;
+
   border: 1px solid var(--border);
 
   background: rgba(12, 15, 18, 0.88);
@@ -343,14 +348,6 @@ h1 span {
   box-shadow:
     0 30px 100px rgba(0, 0, 0, 0.45),
     0 0 0 1px rgba(255, 255, 255, 0.01);
-
-  transform: rotate(1deg);
-
-  transition: transform 0.4s ease;
-}
-
-.code-window:hover {
-  transform: rotate(0deg) translateY(-5px);
 }
 
 .window-bar {
@@ -372,6 +369,18 @@ h1 span {
   border-radius: 50%;
 
   background: var(--border-light);
+}
+
+.window-bar > span:nth-child(1) {
+  background: #ff5f57;
+}
+
+.window-bar > span:nth-child(2) {
+  background: #febc2e;
+}
+
+.window-bar > span:nth-child(3) {
+  background: #28c840;
 }
 
 .window-bar small {
@@ -969,6 +978,18 @@ h2 {
   border-radius: 50%;
 
   background: var(--border-light);
+}
+
+.terminal-dot:nth-child(1) {
+  background: #ff5f57;
+}
+
+.terminal-dot:nth-child(2) {
+  background: #febc2e;
+}
+
+.terminal-dot:nth-child(3) {
+  background: #28c840;
 }
 
 .terminal-title {
