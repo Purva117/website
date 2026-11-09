@@ -1,743 +1,836 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purva Patel</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        body {
-            font-family: 'Nunito Sans';
-            line-height: 1.6;
-            color: #FCF5ED;
-            background-color: #1F1717;
-            overflow: hidden;
-        }
-
-        .light-mode {
-            background-color: #FCF5ED;
-            color: #1F1717;
-        }
-
-        .left-pane {
-            font-family: 'Montserrat', sans-serif;
-            width: 30%;
-            height: 100vh;
-            position: fixed;
-            background: #140F0F; /* Darker variant of #1F1717 */
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 10;
-        }
-
-        .light-mode .left-pane {
-            background: #F4BF96;
-            border-right: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .right-pane {
-            width: 70%;
-            margin-left: 30%;
-            height: 100vh;
-            overflow-y: auto;
-            scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
-        }
-
-        section {
-            min-height: 100vh;
-            padding: 4rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            scroll-snap-align: start;
-            background-color: #1F1717; /* Solid color, no gradient */
-        }
-
-        .light-mode section {
-            background-color: #FCF5ED; /* Solid color for light mode */
-        }
-
-        .toggle-container {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-        }
-
-        .toggle-btn {
-            width: 50px;
-            height: 50px;
-            border: none;
-            border-radius: 50%;
-            background: #140F0F;
-            color: #FCF5ED;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0px 6px #FCF5ED;
-            transition: background 0.3s ease;
-            position: relative;
-        }
-
-        .toggle-btn i {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.25rem;
-            transition: opacity 0.5s ease;
-        }
-
-        .toggle-btn .fa-sun {
-            opacity: 0;
-        }
-
-        .light-mode .toggle-btn {
-            background: #F4BF96;
-            color: #1F1717;
-            box-shadow: 0 0px 6px #1F1717;
-        }
-
-        .light-mode .toggle-btn .fa-moon {
-            opacity: 0;
-        }
-
-        .light-mode .toggle-btn .fa-sun {
-            opacity: 1;
-        }
-
-        .toggle-btn:hover {
-            background: #CE5A67;
-            color: #FCF5ED;
-        }
-
-        .profile-container h1 {
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .profile-container p {
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .profile-container .separator {
-            width: 100%;
-            height: 1px;
-            background: #CE5A67;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-icons {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .contact-icons a {
-            text-decoration: none;
-            font-size: 1.5rem;
-            color: #FCF5ED;
-            transition: all 0.3s ease;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .light-mode .contact-icons a {
-            color: #1F1717;
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        .contact-icons a:hover {
-            color: #FCF5ED;
-            background: #CE5A67;
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(206, 90, 103, 0.4);
-        }
-        
-        .light-mode .contact-icons a:hover {
-            color: #FCF5ED;
-        }
-
-        h2 {
-            color: #CE5A67;
-            margin-bottom: 1.5rem;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .light-mode h2 {
-            color: #CE5A67;
-        }
-
-        .container {
-            max-width: 800px;
-            padding: 0 1rem;
-        }
-
-        /* Academia section CV styling */
-        .education-entry {
-            margin-bottom: 2.5rem;
-            position: relative;
-        }
-
-        .degree-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .institution-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            font-style: italic;
-        }
-
-        .institution {
-            font-weight: 500;
-        }
-
-        .duration {
-            opacity: 0.9;
-        }
-
-        .education-details {
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .education-details::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background-color: #CE5A67;
-        }
-
-        .education-details ul {
-            list-style-type: none;
-        }
-
-        .education-details li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1rem;
-        }
-
-        .education-details li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #CE5A67;
-        }
-
-        /* Projects Section Styling */
-        #projects {
-            overflow: hidden;
-        }
-
-        .section-intro {
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
-            max-width: 650px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.4s ease;
-            height: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .light-mode .project-card {
-            background: rgba(0, 0, 0, 0.03);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(206, 90, 103, 0.2);
-            border-color: rgba(206, 90, 103, 0.3);
-        }
-
-        .project-content {
-            padding: 1.8rem;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-icon {
-            margin-bottom: 1.2rem;
-            font-size: 2rem;
-            color: #CE5A67;
-            display: inline-block;
-            width: 60px;
-            height: 60px;
-            line-height: 60px;
-            text-align: center;
-            border-radius: 50%;
-            background: rgba(206, 90, 103, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover .project-icon {
-            background: #CE5A67;
-            color: #FCF5ED;
-            transform: scale(1.1);
-        }
-
-        .project-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.25rem;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-            color: #FCF5ED;
-            transition: color 0.3s ease;
-        }
-
-        .light-mode .project-card h3 {
-            color: #1F1717;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tech-tags span {
-            font-size: 0.75rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 30px;
-            background: rgba(206, 90, 103, 0.2);
-            color: #CE5A67;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover .tech-tags span {
-            background: rgba(206, 90, 103, 0.3);
-        }
-
-        .project-card p {
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            flex-grow: 1;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: auto;
-        }
-
-        .project-link {
-            color: #FCF5ED;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: all 0.3s ease;
-            opacity: 0.8;
-        }
-
-        .light-mode .project-link {
-            color: #1F1717;
-        }
-
-        .project-link:hover {
-            color: #CE5A67;
-            opacity: 1;
-            transform: translateX(5px);
-        }
-
-        /* Add missing Font Awesome icon */
-        .fa-chart-network:before {
-            content: "\f64f"; /* Using analytics icon as a substitute */
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .project-card {
-                max-width: 100%;
-            }
-        }
-
-        /* Animation for cards */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .project-card {
-            animation: fadeInUp 0.6s ease backwards;
-        }
-
-        .project-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .project-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .project-card:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .project-card:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-        /* Mobile and responsive adjustments */
-        @media (max-width: 992px) {
-            .left-pane {
-                width: 40%;
-            }
-            .right-pane {
-                width: 60%;
-                margin-left: 40%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .left-pane {
-                width: 100%;
-                height: auto;
-                position: relative;
-                padding: 2rem 1rem;
-                min-height: 100vh;
-                scroll-snap-align: start;
-            }
-            .right-pane {
-                width: 100%;
-                margin-left: 0;
-                height: auto;
-            }
-            body {
-                overflow: auto;
-            }
-            .toggle-container {
-                bottom: 20px;
-                right: 20px;
-                left: auto;
-            }
-            /* Ensure scroll-snap still works */
-            html, body {
-                scroll-snap-type: y mandatory;
-                height: 100%;
-                overflow-y: auto;
-            }
-            section, .left-pane {
-                scroll-snap-align: start;
-                min-height: 100vh;
-            }
-        }
-
-        /* Small mobile adjustments */
-        @media (max-width: 480px) {
-            .profile-container h1 {
-                font-size: 1.8rem;
-            }
-            .contact-icons {
-                gap: 1rem;
-            }
-            .contact-icons a {
-                width: 40px;
-                height: 40px;
-                font-size: 1.3rem;
-            }
-            section {
-                padding: 2rem 1rem;
-            }
-        }
-
-        /* For very small screens */
-        @media (max-width: 320px) {
-            .profile-container h1 {
-                font-size: 1.5rem;
-            }
-            .contact-icons a {
-                width: 35px;
-                height: 35px;
-                font-size: 1.1rem;
-            }
-        }
-
-        /* Prevent content from being hidden behind sticky elements on iOS */
-        @supports (-webkit-touch-callout: none) {
-            section {
-                padding-bottom: 5rem;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purva Patel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --bg: #0a0a0a;
+    --bg-raised: #111111;
+    --border: #2b2b2b;
+    --text: #ededea;
+    --text-dim: #8f8f8c;
+    --text-dimmer: #5c5c59;
+    --invert-bg: #ededea;
+    --invert-bg-raised: #dedede;
+    --invert-border: #c4c4c1;
+    --invert-text: #0a0a0a;
+    --invert-text-dim: #4a4a48;
+
+    --font-head: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --ease: 180ms ease;
+  }
+
+  [data-theme="light"] {
+    --bg: #ededea;
+    --bg-raised: #dedede;
+    --border: #c4c4c1;
+    --text: #0a0a0a;
+    --text-dim: #4a4a48;
+    --text-dimmer: #7a7a77;
+    --invert-bg: #0a0a0a;
+    --invert-bg-raised: #111111;
+    --invert-border: #2b2b2b;
+    --invert-text: #ededea;
+    --invert-text-dim: #8f8f8c;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--bg); }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    transition: background var(--ease), color var(--ease);
+  }
+
+  ::selection { background: var(--text); color: var(--bg); }
+
+  a { color: inherit; text-decoration: none; }
+
+  h1, h2, h3 {
+    font-family: var(--font-head);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.01em;
+  }
+
+  .shell {
+    max-width: 1120px;
+    margin: 0 auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    transition: border-color var(--ease);
+  }
+
+  /* ---------- header ---------- */
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 24px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    transition: border-color var(--ease);
+  }
+
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--text);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+
+  .brand-mark svg { width: 11px; height: 11px; }
+
+  .brand-name {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  nav {
+    display: flex;
+    gap: 22px;
+  }
+
+  nav a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    transition: color var(--ease);
+  }
+
+  nav a:hover { color: var(--text); }
+
+  .theme-toggle {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    background: none;
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background var(--ease), color var(--ease), border-color var(--ease);
+  }
+
+  .theme-toggle:hover {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+  }
+
+  .theme-toggle svg { width: 12px; height: 12px; }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    border-bottom: 1px solid var(--border);
+    transition: border-color var(--ease);
+  }
+
+  .hero-main {
+    padding: 64px 24px 56px;
+    border-right: 1px solid var(--border);
+    transition: border-color var(--ease);
+  }
+
+  .hero-eyebrow {
+    color: var(--text-dimmer);
+    display: block;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.08;
+    max-width: 12ch;
+  }
+
+  .hero p {
+    margin-top: 22px;
+    max-width: 46ch;
+    color: var(--text-dim);
+    font-size: 15.5px;
+  }
+
+  .hero-side {
+    padding: 64px 24px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .status-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--text);
+    flex-shrink: 0;
+  }
+
+  .field-list dt {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dimmer);
+    margin-top: 16px;
+  }
+  .field-list dt:first-child { margin-top: 0; }
+
+  .field-list dd {
+    font-size: 14px;
+    margin-top: 3px;
+  }
+
+  /* ---------- section framing ---------- */
+
+  .section-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 16px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    transition: border-color var(--ease);
+  }
+
+  .section-head h2 {
+    font-size: 15px;
+  }
+
+  .section-head .mono { color: var(--text-dimmer); }
+
+  /* ---------- work grid ---------- */
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background: var(--border);
+    gap: 1px;
+    border-bottom: 1px solid var(--border);
+    transition: background var(--ease), border-color var(--ease);
+  }
+
+  .card {
+    background: var(--bg);
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    cursor: default;
+    transition: background var(--ease), color var(--ease), transform 200ms ease, box-shadow 200ms ease;
+    position: relative;
+  }
+
+  .card:hover {
+    background: var(--invert-bg);
+    color: var(--invert-text);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px -14px rgba(0,0,0,0.55);
+    z-index: 2;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .card-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dimmer);
+    transition: color var(--ease);
+  }
+
+  .card:hover .card-index { color: var(--invert-text-dim); }
+
+  .card-icon {
+    width: 26px;
+    height: 26px;
+    border: 1px solid var(--border);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    transition: border-color var(--ease);
+  }
+
+  .card:hover .card-icon { border-color: var(--invert-border); }
+
+  .card-icon svg {
+    width: 13px;
+    height: 13px;
+    stroke: var(--text);
+    transition: stroke var(--ease);
+  }
+
+  .card:hover .card-icon svg { stroke: var(--invert-text); }
+
+  .card h3 {
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .card-desc {
+    color: var(--text-dim);
+    font-size: 13.5px;
+    transition: color var(--ease);
+  }
+
+  .card:hover .card-desc { color: var(--invert-text-dim); }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 10px;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    padding: 3px 7px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    transition: border-color var(--ease), color var(--ease);
+  }
+
+  .card:hover .tag {
+    border-color: var(--invert-border);
+    color: var(--invert-text-dim);
+  }
+
+  /* ---------- stack ---------- */
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--border);
+    gap: 1px;
+    border-bottom: 1px solid var(--border);
+    transition: background var(--ease), border-color var(--ease);
+  }
+
+  .stack-item {
+    background: var(--bg);
+    padding: 18px 20px;
+    transition: background var(--ease), color var(--ease), transform 200ms ease, box-shadow 200ms ease;
+  }
+
+  .stack-item:hover {
+    background: var(--invert-bg);
+    color: var(--invert-text);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px -14px rgba(0,0,0,0.55);
+  }
+
+  .stack-cat {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-dimmer);
+    display: block;
+    margin-bottom: 8px;
+    transition: color var(--ease);
+  }
+
+  .stack-item:hover .stack-cat { color: var(--invert-text-dim); }
+
+  .stack-item p {
+    font-size: 13.5px;
+    color: var(--text);
+    transition: color var(--ease);
+  }
+
+  .stack-item:hover p { color: var(--invert-text); }
+
+  /* ---------- experience ---------- */
+
+  .exp-row {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 18px;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    transition: background var(--ease), border-color var(--ease);
+  }
+
+  .exp-row:hover { background: var(--bg-raised); }
+
+  .exp-row:last-child { border-bottom: none; }
+
+  .exp-date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dimmer);
+    padding-top: 2px;
+  }
+
+  .exp-role { font-size: 15px; font-weight: 500; font-family: var(--font-head); }
+
+  .exp-org { color: var(--text-dim); font-size: 13.5px; margin-top: 4px; }
+
+  .exp-tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-dimmer);
+    align-self: start;
+  }
+
+  /* ---------- footer / contact ---------- */
+
+  footer {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+  }
+
+  .contact-main {
+    padding: 56px 24px;
+    border-right: 1px solid var(--border);
+    transition: border-color var(--ease);
+  }
+
+  .contact-main h2 {
+    font-size: clamp(26px, 3.4vw, 36px);
+    max-width: 14ch;
+    line-height: 1.15;
+  }
+
+  .contact-main p {
+    margin-top: 18px;
+    color: var(--text-dim);
+    max-width: 42ch;
+  }
+
+  .contact-links {
+    padding: 56px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    transition: border-color var(--ease), padding var(--ease), color var(--ease);
+  }
+
+  .contact-link:hover {
+    color: var(--text-dim);
+    padding-left: 6px;
+  }
+
+  .contact-link svg {
+    width: 12px;
+    height: 12px;
+    stroke: var(--text-dimmer);
+    transition: transform var(--ease);
+  }
+
+  .contact-link:hover svg { transform: translateX(3px); }
+
+  .foot-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dimmer);
+    transition: border-color var(--ease);
+  }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 760px) {
+    header { grid-template-columns: 1fr auto; }
+    nav { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-main { border-right: none; border-bottom: 1px solid var(--border); }
+    .grid { grid-template-columns: 1fr; }
+    .stack-grid { grid-template-columns: repeat(2, 1fr); }
+    .exp-row { grid-template-columns: 1fr; gap: 6px; }
+    footer { grid-template-columns: 1fr; }
+    .contact-main { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+
+</style>
 </head>
 <body>
-    <div class="left-pane">
-        <div class="profile-container">
-            <h1>Purva Patel</h1>
-            <div class="separator"></div>
-            <p>AI Engineer</p>
-            <div class="contact-icons">
-              <a href="https://github.com/Purva117" target="_blank"><i class="fab fa-github"></i></a>
-              <a href="https://www.linkedin.com/in/purvapatel117/" target="_blank"><i class="fab fa-linkedin"></i></a>
-              <a href="mailto:purvapatel173@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
-          </div>
+
+<div class="shell">
+
+  <header>
+    <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img" aria-label="प">
+            <text
+              x="12"
+              y="22"
+              text-anchor="middle"
+              font-family="Noto Sans Devanagari, serif"
+              font-size="24"
+              fill="currentColor"
+            >प</text>
+          </svg>
+        </span>
+      <span class="brand-name">Purva Patel</span>
+    </div>
+    <nav>
+      <a href="#work">work</a>
+      <a href="#stack">stack</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
+      <svg id="toggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <!--<span id="toggleLabel">dark</span>-->
+    </button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-main">
+      <span class="hero-eyebrow mono">SYS.001 — profile</span>
+      <h1>Building robust AI systems.</h1>
+      <p>I'm an AI systems engineer. I spend most of my time on inference infrastructure, evaluation pipelines, and the unglamorous plumbing that keeps model behavior predictable in production.*</p>
+    </div>
+    <div class="hero-side">
+      <div class="status-line mono">
+        <span class="status-dot"></span>
+        open to select collab work
+      </div>
+      <dl class="field-list">
+        <dt>base</dt>
+        <dd>Berlin, DE</dd>
+        <dt>focus</dt>
+        <dd>AI systems, agents, automations</dd>
+        <dt>currently</dt>
+        <dd>Software Dev @ GUTcert GmbH</dd>
+        <dt>off hours</dt>
+        <dd>side projects, visual tools, and too many tabs</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="section-head">
+      <h2>work</h2>
+      <span></span>
+      <span class="mono">06 entries</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-top">
+          <span class="card-index">01 / WORK</span>
+          <span class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="13" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+                <path d="M8 9h8M8 12h5"/>
+              </svg>
+          </span>
         </div>
-    </div>
+        <h3>Local AI Platform</h3>
+        <p class="card-desc">Self hosted AI assistant with secure routing, hybrid document retrieval, and agentic workflows for internal knowledge.</p>
+        <div class="tag-row">
+          <span class="tag">python</span>
+          <span class="tag">fastapi</span>
+          <span class="tag">postgres</span>
+          <span class="tag">PHP</span>
+          <span class="tag">nginx</span>
+        </div>
+      </article>
 
-    <div class="right-pane">
-        <section id="hero">
-            <div class="container">
-              <h2>Namaste! I'm Purva.</h2>
-              <p>I’m an AI Engineer focused on solving real-world problems and improving productivity to make life easier. With a background in Computational Modeling and Simulation, I break down complex data into meaningful insights. My expertise includes large language models (LLMs), retrieval-augmented generation (RAG), and automation, primarily using Python and deep learning frameworks.<br><br>Beyond work, I enjoy chess, hiking, and art—always up for a challenge, whether on a chessboard, a mountain trail, or a blank canvas. Let’s connect and build something great!</p>
+      <article class="card">
+        <div class="card-top">
+            <span class="card-index">04 / WORK</span>
+            <span class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter">
+                  <rect x="2.5" y="9.5" width="4.5" height="5"/>
+                  <rect x="17" y="9.5" width="4.5" height="5"/>
+                  <path d="M7 12h4"/>
+                  <path d="M13 12h4"/>
+                  <path d="M11 9.5h2v5h-2z"/>
+                  <path d="M14.5 12h.01"/>
+                </svg>
+            </span>
+        </div>
+        <h3>Automated ETL pipeline </h3>
+        <p class="card-desc">Scheduled pipeline for ingesting internal documentation from heterogeneous sources, and loading into retrieval-ready KBs.</p>
+        <div class="tag-row">
+          <span class="tag">python</span>
+          <span class="tag">cron</span>
+          <span class="tag">postgres</span>
+          <span class="tag">ollama</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="card-index">03 / WORK</span>
+          <span class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+                <path d="M14 3v5h5"/>
+                <path d="M9 14l2 2 4-4"/>
+              </svg>
+          </span>
+        </div>
+        <h3>Guideline-aware document review</h3>
+        <p class="card-desc">Document-review workflow that validates submissions against internal guidelines using retrieval, structured rules, and traceable model reasoning.</p>
+        <div class="tag-row">
+          <span class="tag">agents</span>
+          <span class="tag">python</span>
+          <span class="tag">postgres</span>
+          <span class="tag">vLLM</span>
+        </div>
+      </article>
+
+      <a href="https://voice-assistant-docs.netlify.app/" target="_blank" rel="noopener noreferrer">
+          <article class="card">
+            <div class="card-top">
+              <span class="card-index">04 / WORK</span>
+              <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V9l8-6 8 6v10"/><path d="M9 22V13h6v9"/></svg></span>
             </div>
-        </section>
-        
-        <section id="work-expereince">
-            <div class="container">
-                <h2>Work Experience</h2>
-
-                <div class="education-entry">
-                  <div class="degree-title">AI Engineer</div>
-                  <div class="institution-info">
-                      <div class="institution">GUTcert</div>
-                      <div class="duration">12.2024 - Present</div>
-                  </div>
-                  <div class="education-details">
-                      <ul>
-                          <li>Developing and integrating AI solutions to assist redundant and repetitive processes</li>
-                          <li>Addressing variety of state-of-the-art techniques including RAG, RAFT and custom fine-tuning of LLMs</li>
-                      </ul>
-                  </div>
-              </div>
-
-              <div class="education-entry">
-                  <div class="degree-title">Computer Scientist</div>
-                  <div class="institution-info">
-                      <div class="institution">Global Climate Forum</div>
-                      <div class="duration">09.2024 - 11.2024</div>
-                  </div>
-                  <div class="education-details">
-                      <ul>
-                          <li>Agent-based model of Opinion Dynamics</li>
-                          <li>Developed an interactive web application with possibility of varying model parameters</li>
-                      </ul>
-                  </div>
-              </div>
-
-              <div class="education-entry">
-                  <div class="degree-title">Student Research Assistant</div>
-                  <div class="institution-info">
-                      <div class="institution">Physics of Life - Dresden, DE</div>
-                      <div class="duration">05.2023 - 12.2023<br>05.2022 - 10.2022</div>
-                  </div>
-                  <div class="education-details">
-                      <ul>
-                          <li>Executed data analysis methodologies for biological fluid datasets with over 2400 features and identified 7% of total features for biological inferences</li>
-                          <li>Validated Topological Data Analysis ranked list, finding ~45% common features in the top 171</li>
-                          <li>Developed an image analysis pipeline for feature quantification with 87% accuracy</li>
-                      </ul>
-                  </div>
-              </div>
-
+            <h3>Vocie Assistant</h3>
+            <p class="card-desc">A privacy-first, local-first conversational voice assistant: one application core, driven by both a command-line interface and a desktop GUI.</p>
+            <div class="tag-row">
+              <span class="tag">python</span>
+              <span class="tag">html</span>
+              <span class="tag">powershell</span>
             </div>
-        </section>
+          </article>
+      </a>
 
-        <section id="academia">
-            <div class="container">
-                <h2>Academia</h2>
-                
-                <div class="education-entry">
-                    <div class="degree-title">M.S - Computational Modeling & Simulation</div>
-                    <div class="institution-info">
-                        <div class="institution">TU Dresden, DE</div>
-                        <div class="duration">10.2020 - 01.2024</div>
-                    </div>
-                    <div class="education-details">
-                        <ul>
-                            <li>Focus: AI, ML, Numerical & Statistical Modeling, Data Science</li>
-                            <li>Dissertation on "Detecting Patterns in 'omics data"</li>
-                            <li>Overall Grade: 2.0</li>
-                        </ul>
-                    </div>
-                </div>
+    <a href="https://worldgen-docs.netlify.app/" target="_blank" rel="noopener noreferrer">
+      <article class="card">
+        <div class="card-top">
+          <span class="card-index">05 / WORK</span>
+          <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 15l4-6 3 3 5-8"/></svg></span>
+        </div>
+        <h3>WORLDGEN</h3>
+        <p class="card-desc">Local-first, reproducible Python worldbuilding simulator with physical mechanics for tectonics, hydrology, climate, biomes, disasters and so much more</p>
+        <div class="tag-row">
+          <span class="tag">python</span>
+          <span class="tag">NPZ</span>
+          <span class="tag">scipy</span>
+          <span class="tag">pytest</span>
+        </div>
+      </article>
+    </a>
 
-                <div class="education-entry">
-                    <div class="degree-title">B.Tech - Mechanical Engineering</div>
-                    <div class="institution-info">
-                        <div class="institution">PDPU Gandhinagar, IN</div>
-                        <div class="duration">08.2015 - 06.2019</div>
-                    </div>
-                    <div class="education-details">
-                        <ul>
-                            <li>Focus: Calculus, Tensor algebra, Optimization, Programming, Mechanics & Physics</li>
-                            <li>Overall Grade: 9.09 out of 10 (German equivalent: 1.46)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <a href="https://research-assistant-docs.netlify.app/" target="_blank" rel="noopener noreferrer">
+      <article class="card">
+        <div class="card-top">
+          <span class="card-index">06 / WORK</span>
+          <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 15l4-6 3 3 5-8"/></svg></span>
+        </div>
+        <h3>Research-Assistant</h3>
+        <p class="card-desc">Local deep-research agent that turns a research question into a traceable evidence synthesis with scope definition, literature search, verification, and export.</p>
+        <div class="tag-row">
+          <span class="tag">python</span>
+          <span class="tag">NPZ</span>
+          <span class="tag">scipy</span>
+          <span class="tag">pytest</span>
+        </div>
+      </article>
+    </a>
 
+    <a href="https://toolgate-docs.netlify.app/" target="_blank" rel="noopener noreferrer">
+      <article class="card">
+        <div class="card-top">
+          <span class="card-index">07 / WORK</span>
+          <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 15l4-6 3 3 5-8"/></svg></span>
+        </div>
+        <h3>ToolGate</h3>
+        <p class="card-desc"> Local-first tool-calling gateway that sits between an LLM application and explicitly registered tools.</p>
+        <div class="tag-row">
+          <span class="tag">python</span>
+          <span class="tag">pytest</span>
+        </div>
+      </article>
+    </a>
 
-        <section id="projects">
-          <div class="container">
-              <h2>Projects</h2>
-              
-              <div class="projects-grid">
-                  <div class="project-card">
-                      <div class="project-content">
-                          <div class="project-icon">
-                              <i class="fa-solid fa-earth-europe"></i>
-                          </div>
-                          <h3>Global News Summarizer</h3>
-                          <div class="tech-tags">
-                              <span>Python</span>
-                              <span>JS</span>
-                              <span>HTML</span>
-                          </div>
-                          <p>Developed an LLM-powered news summarizer with web scraping and geolocation inference, visualizing headlines dynamically.</p>
-                          <div class="project-links">
-                              <a href="https://global-news-navigator.netlify.app/" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
-                          </div>
-                      </div>
-                  </div>
-                  
-                  <div class="project-card">
-                      <div class="project-content">
-                          <div class="project-icon">
-                              <i class="fa-solid fa-circle-nodes"></i>
-                          </div>
-                          <h3>Master’s Thesis: Detecting Patterns in 'Omics Data</h3>
-                          <div class="tech-tags">
-                              <span>Pandas</span>
-                              <span>Scikit-learn</span>
-                              <span>TDA</span>
-                          </div>
-                          <p>Classified biological samples using non-linear dimensional reduction, identifying 9 key features from 2500+ attributes.</p>
-                      </div>
-                  </div>
-                  
-                  <div class="project-card">
-                      <div class="project-content">
-                          <div class="project-icon">
-                              <i class="fa-solid fa-people-group"></i>
-                          </div>
-                          <h3>Opinion Dynamics Simulator</h3>
-                          <div class="tech-tags">
-                              <span>Python</span>
-                              <span>JS</span>
-                              <span>HTML</span>
-                          </div>
-                          <p>Created an interactive web application to simulate and visualize how opinions spread through social networks under various parameter conditions.</p>
-                          <div class="project-links">
-                              <a href="https://hk-opinion-dynamics-model.netlify.app/page2" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                          </div>
-                      </div>
-                  </div>
-                  
-                  <div class="project-card">
-                      <div class="project-content">
-                          <div class="project-icon">
-                              <i class="fa-solid fa-dna"></i>
-                          </div>
-                          <h3>Research Project: Quantitative Modeling of Protein Sensitivity</h3>
-                          <div class="tech-tags">
-                              <span>Pandas</span>
-                              <span>Scikit-learn</span>
-                              <span>Plotly - DASH</span>
-                          </div>
-                          <p>Developed models to classify cell behavior with R² = 0.59, improving accuracy by 20% using non-linear ML techniques and bootstrapping.</p>
-                      </div>
-                  </div>
-              </div>
-          </div>        
-        </section>
     </div>
+  </section>
 
-    <div class="toggle-container">
-        <button class="toggle-btn" onclick="toggleLightMode()">
-            <i class="fas fa-moon"></i>
-            <i class="fas fa-sun"></i>
-        </button>
+  <section id="stack">
+    <div class="section-head">
+      <h2>Working stack</h2>
+      <span></span>
+      <span class="mono">by category</span>
     </div>
+    <div class="stack-grid">
+      <div class="stack-item">
+        <span class="stack-cat mono">languages</span>
+        <p>Python, PHP, SQL</p>
+      </div>
+      <div class="stack-item">
+        <span class="stack-cat mono">data</span>
+        <p>Postgres, SQLite, Vector</p>
+      </div>
+      <div class="stack-item">
+        <span class="stack-cat mono">LLM</span>
+        <p>local, hybrid-retrieval, agents, evals, prompt-injection defences</p>
+      </div>
+      <div class="stack-item">
+        <span class="stack-cat mono">backend</span>
+        <p>FastAPI, Authorization, API design, webhooks</p>
+      </div>
+      <div class="stack-item">
+        <span class="stack-cat mono">frontend</span>
+        <p>JS, HTML5, CSS3, Tailwind, Bootstrap</p>
+      </div>
+      <div class="stack-item">
+        <span class="stack-cat mono">infrastructure</span>
+        <p>Linux, Docker, git, cron, SSH, nginx</p>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        function toggleLightMode() {
-            document.body.classList.toggle('light-mode');
-        }
+  <section id="experience">
+    <div class="section-head">
+      <h2>Experience</h2>
+      <span></span>
+      <span class="mono">reverse chronological</span>
+    </div>
+    <div class="exp-list">
+      <div class="exp-row">
+        <span class="exp-date mono">12.2024 - now</span>
+        <div>
+          <div class="exp-role">Software Developer</div>
+          <div class="exp-org">GUTcert GmbH</div>
+        </div>
+        <span class="exp-tag mono">berlin, de</span>
+      </div>
+      <div class="exp-row">
+        <span class="exp-date mono">06.2024 - 11.2024</span>
+        <div>
+          <div class="exp-role">Junior Computer Scientist</div>
+          <div class="exp-org">Global Climate Forum</div>
+        </div>
+        <span class="exp-tag mono">remote</span>
+      </div>
+      <div class="exp-row">
+        <span class="exp-date mono">05.2022 - 12.2023</span>
+        <div>
+          <div class="exp-role">Student Research Assistant</div>
+          <div class="exp-org">Physics of Life</div>
+        </div>
+        <span class="exp-tag mono">dresden, de</span>
+      </div>
+    </div>
+  </section>
 
-        document.addEventListener('DOMContentLoaded', function() {
-          const projectCards = document.querySelectorAll('.project-card');
-          
-          projectCards.forEach(card => {
-              card.addEventListener('mouseenter', function() {
-                  this.style.transform = 'translateY(-10px)';
-              });
-              
-              card.addEventListener('mouseleave', function() {
-                  this.style.transform = 'translateY(0)';
-              });
-          });
-      });
-    </script>
+  <footer id="contact">
+    <div class="contact-main">
+      <h2>Have something worth building?</h2>
+      <p>I build practical AI systems with an emphasis on privacy, reliability, and long-term maintainability. Open to select collaborations in my free time.</p>
+    </div>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:purva.informatik@gmail.com">
+        <span>purva.informatik@gmail.com</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/purvapatel117/">
+        <span>linkedin.com/purvapatel117</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="contact-link" href="https://github.com/Purva117">
+        <span>github.com/Purva117</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <!--<a class="contact-link" href="#">
+        <span>curriculum vitae — pdf</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>-->
+    </div>
+  </footer>
 
-    
+  <div class="foot-bar">
+    <span>PURVA PATEL</span>
+    <span id="clock">BERLIN — LOCAL TIME</span>
+  </div>
+
+</div>
+
+<script>
+  const root = document.documentElement;
+  const toggleBtn = document.getElementById('themeToggle');
+
+  let current = 'dark';
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    current = current === 'dark' ? 'light' : 'dark';
+    applyTheme(current);
+  });
+
+  applyTheme(current);
+
+  // live local time in the footer
+  function updateClock() {
+    const el = document.getElementById('clock');
+    if (!el) return;
+    const now = new Date();
+    const time = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    el.textContent = 'BERLIN — ' + time;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+
 </body>
 </html>
